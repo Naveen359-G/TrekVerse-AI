@@ -25,7 +25,7 @@ Baseline: **2026-10-31**, after merged multi-currency support and optional onlin
 | TrekForGood / Impact | Implemented | Dated self-reported activity records | No impact verification, charity transfer or environmental measurement |
 | Assistant | Implemented | Keyword/rule-based contextual replies and actions | Not LLM-backed; no autonomous external actions |
 | INR / MYR / SGD | Implemented | Currency selection, conversion, formatting, consistent budget calculations and INR legacy compatibility | Bundled 2025-01-02 default with optional refreshed references for new plans; not retail rates or live destination quotes |
-| Planning/currency test execution | Blocked | Twelve planning and seven currency test definitions are present | Direct Node command stops before assertions on an extensionless `currency` import; see [testing](TESTING.md) |
+| Planning/currency/persistence test execution | Tested | `pnpm --filter @workspace/trekverse-ai run test`: 39 passing checks, including 11 actual-App DOM persistence/migration cases; test typecheck passes (2026-10-31) | Uses explicit tsx runner; DOM tests do not verify browser layout or every PlanB scenario; see [testing](TESTING.md) |
 | Optional online place discovery | Implemented | Explicit city search/disambiguation via Nominatim, nearby OSM candidates via Overpass, source attribution, 24-hour cache and error/empty states | Research only within 25 km; straight-line distances, not verified trips; no fitness ranking or itinerary generation for online candidates |
 | Optional exchange-rate refresh | Implemented | Manual Frankfurter/ECB retrieval with provider, date, status and explicit errors; saved-trip historical snapshots | No automatic refresh or live retail quotes; saved amounts remain unchanged |
 | Authentication and cloud sharing | Not Started | No login required | Optional future capability, not an MVP prerequisite |
@@ -34,8 +34,8 @@ Baseline: **2026-10-31**, after merged multi-currency support and optional onlin
 
 ## Open issues and checks
 
-1. Repair or standardize the test runner before claiming all current planning, currency and discovery cases pass.
-2. Verify saved-trip currency switching, PlanB restore and mixed-currency group budgets in the browser after relevant changes.
+1. Keep the `trekverse-regressions` validation green when changing stored trip or currency behavior.
+2. Saved-trip currency switching, budget/cancellation PlanB restore and mixed-currency budgets now have repeatable DOM checks; use a real browser when a change depends on browser-specific behavior.
 3. Keep online map research separate from curated trip planning; do not imply map candidates have verified costs, grades or routes.
 4. Expand automation for timer behavior, quests, local persistence failure and full PlanB apply/restore propagation.
 

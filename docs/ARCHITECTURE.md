@@ -31,6 +31,8 @@ Preferences represent the current discovery brief. The active adventure has its 
 
 React effects persist preferences, the active adventure, bookmarks and saved adventures to browser storage. Load helpers normalize older records. There is no server synchronization, transactional persistence layer or cloud backup.
 
+The active loader passes the raw partial record into normalization rather than first merging starter preferences, so records without a preference context can recover their destination origin. Missing currency still means INR. `tests/persistence.test.mts` exercises these actual hooks, controls and storage effects through React DOM/jsdom, including fresh-tree reloads; production state ownership and storage keys are unchanged.
+
 A changed search origin selects a new candidate pool, not a relabeled active trip. Trip screens use the trip's own origin context. The same distinction applies to stored currency: absence means INR regardless of location.
 
 Optional online discovery sends the typed city or selected coordinates to public map providers, not the trip roster or budgets. Its separate cache uses the `tv-discovery-v1:` key prefix. Online candidates have unknown routing, grade, access and cost; they are not passed into itinerary generation.

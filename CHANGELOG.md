@@ -6,6 +6,8 @@ Meaningful changes are recorded here. The package currently reports `0.0.0`; no 
 
 ### Added
 
+- Repeatable saved-trip currency/migration regressions against the actual React app, with isolated storage and coverage for INR/MYR/SGD save/open/reload/duplicate, PlanB acceptance/restoration and mixed member budgets.
+- Product test scripts and the `trekverse-regressions` validation gate using an explicit TypeScript/JSX runner.
 - Origin-specific sample catalogs for ten cities with explicit country-to-city guidance.
 - Explainable recommendations, GroupSync, dated itineraries, locally saved adventures and connected PlanB previews/revisions.
 - Simulated route progress, one-time quest rewards and dated self-reported impact.
@@ -16,6 +18,7 @@ Meaningful changes are recorded here. The package currently reports `0.0.0`; no 
 
 ### Changed
 
+- Legacy active trips without preferences recover their destination origin before starter defaults are applied; missing currency still means INR and stored amounts remain unchanged.
 - Destination pools and alternatives use the selected origin instead of only changing the displayed city.
 - Existing trip context is retained when the discovery origin changes.
 - Missing currency in legacy records retains INR semantics.

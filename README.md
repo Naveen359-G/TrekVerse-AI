@@ -79,4 +79,4 @@ Start with [feature status](docs/FEATURE_STATUS.md), [requirements](docs/PRD.md)
 - Design and decisions: [design system](docs/DESIGN_SYSTEM.md), [AI strategy](docs/AI_STRATEGY.md), [decisions](docs/DECISIONS.md)
 - History: [changelog](CHANGELOG.md)
 
-Documentation baseline: **2026-10-31**. Current typecheck passes. The direct Node test runner is blocked by module resolution; see [testing](docs/TESTING.md) before claiming a green suite.
+Verification baseline: **2026-10-31**. Product/test typechecks and production build pass. `pnpm --filter @workspace/trekverse-ai run test` passes 39 checks, including 11 saved-trip DOM persistence/migration cases; see [testing](docs/TESTING.md) for scope and limitations.

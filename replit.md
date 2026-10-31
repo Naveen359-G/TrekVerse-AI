@@ -8,6 +8,9 @@ Read [AGENTS.md](AGENTS.md) for coding guardrails and required documentation mai
 
 - Existing workflow `artifacts/trekverse-ai: web` — run the product preview; managed workflows supply `PORT` and `BASE_PATH`
 - `pnpm --filter @workspace/trekverse-ai run typecheck` — product typecheck
+- `pnpm --filter @workspace/trekverse-ai run test` — all product logic and DOM persistence checks
+- `pnpm --filter @workspace/trekverse-ai run test:persistence` — saved-trip currency/migration regressions
+- `pnpm --filter @workspace/trekverse-ai run typecheck:tests` — typecheck product and test sources
 - `PORT=5000 BASE_PATH=/ pnpm --filter @workspace/trekverse-ai run build` — product build
 - `pnpm --filter @workspace/api-server run dev` — optional API scaffold; not the current planning backend
 - `pnpm run typecheck` — full typecheck across all packages
@@ -49,7 +52,7 @@ Maintain project Markdown files alongside implementation changes. Update feature
 
 - Never present sample routes, estimated costs, heuristic readiness or simulated terrain as live verified guidance.
 - Never substitute another city's destinations or silently reinterpret stored monetary units.
-- The current native Node test invocation is blocked by extensionless module resolution after the currency change. See [docs/TESTING.md](docs/TESTING.md); do not claim an unexecuted suite passes.
+- Use the product test scripts (explicit tsx runner and test JSX config), not the old native Node invocation, which cannot resolve the app's extensionless imports. See [docs/TESTING.md](docs/TESTING.md).
 
 ## Pointers
 

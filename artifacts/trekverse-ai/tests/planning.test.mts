@@ -14,6 +14,7 @@ import {
   destinationOrigin,
   matchesOrigin,
   supportedOrigins,
+  type PlanningDestination,
 } from '../src/lib/planning.ts';
 import { regionalDestinations } from '../src/lib/regional-destinations.ts';
 
@@ -27,7 +28,7 @@ const members = [
   { name: 'Walker', fitness: 'Moderate', budget: '2000', activity: 'Trek', availableHours: 12 },
   { name: 'Explorer', fitness: 'Experienced', budget: '2000', activity: 'Nature', availableHours: 12 },
 ];
-const forest = { id: 'ananthagiri', name: 'Forest', region: 'Sample', drive: 82, hours: 4, difficulty: 'Easy', cost: 1450, kind: 'Forest trek', mood: ['quiet', 'reset'], durationDays: 1, minGroup: 1, maxGroup: 10 };
+const forest: PlanningDestination = { id: 'ananthagiri', name: 'Forest', region: 'Sample', drive: 82, hours: 4, difficulty: 'Easy', cost: 1450, kind: 'Forest trek', mood: ['quiet', 'reset'], durationDays: 1, minGroup: 1, maxGroup: 10 };
 const nearby = { ...forest, id: 'kondapochamma', name: 'Nearby nature', hours: 3, cost: 950, kind: 'Nature drive' };
 const overnight = { ...forest, id: 'laknavaram', name: 'Overnight', hours: 8, cost: 3100, durationDays: 2 };
 

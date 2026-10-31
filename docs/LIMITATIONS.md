@@ -39,4 +39,4 @@ TrekVerse AI is a planning prototype. Do not use it as a substitute for official
 
 ## Verification boundary
 
-Documentation and historical screenshots are not current test evidence. The latest native Node logic-test invocation is blocked at module loading. See [testing](TESTING.md) for dates, commands and the distinction between historical passes and current unverified behavior.
+Documentation and historical screenshots are not current test evidence. The supported product test script now passes 39 logic and DOM integration checks, including saved-trip currency migrations; the old native Node invocation still cannot resolve extensionless imports. These checks do not establish real-browser layout, storage-quota resilience or full coverage of every PlanB scenario. See [testing](TESTING.md) for dates, commands and coverage boundaries.

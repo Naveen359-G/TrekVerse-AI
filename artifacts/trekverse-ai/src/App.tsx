@@ -69,7 +69,7 @@ const nav: {name:Screen;icon:any;group:string}[]=[
 ];
 const readStored=<T,>(key:string,fallback:T):T=>{try{const v=localStorage.getItem(key);return v?{...fallback,...JSON.parse(v)}:fallback;}catch{return fallback;}};
 const loadPrefs=()=>{const stored=normalizePrefs(readStored('tv-prefs',initialPrefs));return stored.date<initialPrefs.date?{...stored,date:initialPrefs.date}:stored;};
-const loadAdventure=()=>normalizeAdventure(readStored<Partial<Adventure>>('tv-adventure',starterAdventure));
+const loadAdventure=()=>normalizeAdventure(readStored<Partial<Adventure>>('tv-adventure',{}));
 const loadSavedAdventures=():Adventure[]=>{try{const raw=JSON.parse(localStorage.getItem('tv-adventures')||'[]');return Array.isArray(raw)?raw.filter((item:any)=>item&&typeof item==='object').map((item:any)=>normalizeAdventure(item)):[]}catch{return[]}};
 function App() {
   const [screen,setScreen]=useState<Screen>('Discover');

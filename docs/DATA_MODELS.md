@@ -59,3 +59,5 @@ Example only; runtime onboarding chooses a future date rather than fixing the da
 Online discovery has separate `DiscoveredCity` (id, label, country, lat, lon, sourceUrl), `NearbyPlace` (id, name, kind, lat, lon, distanceKm, sourceUrl) and `DiscoveryResult<T>` (items, fetchedAt, cached) contracts in `src/lib/discovery.ts`. A map candidate is not a `Destination` with known travel/cost/grade assumptions.
 
 Normalization supports older local records. Missing currency means INR in preferences, members and restored contexts; preserve that interpretation even when the origin is international. There is no documented stable external API or versioned database schema for these objects.
+
+When the entire preferences object is absent, normalization recovers the origin from the saved destination, not the starter plan or current search. Amounts remain in INR. The active loader and saved-list loader must both allow this migration before applying defaults. Automated fixtures cover both loaders and persisted PlanB prior contexts; no stored shape or currency policy changed.
