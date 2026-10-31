@@ -24,7 +24,7 @@ The offline catalog covers Hyderabad, Bengaluru, Mumbai, Pune, Delhi, Chennai, K
 
 Optional online city search (Nominatim) and nearby map discovery (Overpass/OpenStreetMap) extend research beyond those catalogs. Users explicitly choose a city and run the search. Nearby points within 25 km are research candidates only: straight-line distance, unknown route/cost/grade/access, and no generated itinerary. Results include attribution and a 24-hour cache.
 
-Budgets support INR, MYR and SGD. Conversion uses a disclosed **2025-01-02 reference**, not current exchange rates. Legacy records without a currency remain INR.
+Budgets support INR, MYR and SGD. The offline default is a disclosed **2025-01-02 ECB reference**. Users can optionally refresh the latest published Frankfurter/ECB reference for new plans, with provider, rate date and retrieval status shown. Each trip keeps its historical rate snapshot and monetary amounts; opening it does not replace the new-plan rate selection. Destination prices remain illustrative, not live quotes. Legacy records without a currency remain INR.
 
 ## Run locally
 

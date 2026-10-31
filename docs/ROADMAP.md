@@ -7,7 +7,8 @@ Baseline: 2026-10-31. This file distinguishes current work from ideas; it is not
 - **Required:** Restore a reproducible planning/currency test command.
 - **Implemented:** Origin-correct catalog matching and explicit unsupported-city guidance.
 - **Implemented:** INR/MYR/SGD support using a dated offline reference.
-- **Queued separately:** Exchange-rate refresh without silently changing saved budgets; saved-trip currency regression work.
+- **Implemented:** Optional exchange-rate refresh for new plans with historical saved-trip rates and unchanged monetary amounts.
+- **Queued separately:** Saved-trip currency regression work.
 - **Implemented:** Optional online city/disambiguation and nearby map discovery beyond the ten offline catalogs; research-only points, not complete planned adventures.
 - **Maintenance:** Preserve documentation, saved-data semantics and truthful simulation labels.
 

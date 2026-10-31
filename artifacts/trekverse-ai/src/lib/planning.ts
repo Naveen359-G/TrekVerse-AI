@@ -1,4 +1,4 @@
-import { destinationCost, formatMoney, lowestBudget, type Currency } from './currency';
+import { destinationCost, exchangeReference, formatMoney, lowestBudget, type Currency, type ExchangeRates } from './currency';
 import { isDiscoveredCity, type DiscoveredCity } from './discovery';
 export type FitnessLevel = 'Easy' | 'Moderate' | 'Experienced';
 
@@ -52,6 +52,7 @@ export type PlanningMember = {
 };
 
 export type PlanningPreferences = {
+  exchangeRates?: ExchangeRates;
   currency?: Currency;
   city: string;
   date: string;
@@ -133,7 +134,7 @@ export function assessDestination<T extends PlanningDestination>(
   const travelLimit = numeric(preferences.travel, 12);
   const statedBudget = Number(preferences.budget) || 0;
   const currency = preferences.currency ?? 'INR';
-  const cost = destinationCost(destination, currency);
+  const cost = destinationCost(destination, currency, preferences.exchangeRates);
   const groupBudget = lowestBudget(preferences, members);
   const groupSize = numeric(preferences.group, members.length || 1);
   const daysNeeded = destination.durationDays ?? 1;
@@ -306,7 +307,7 @@ export function relaxPreference(
   field: string,
   destination: PlanningDestination,
 ): PlanningPreferences {
-  if (field === 'budget') return { ...preferences, budget: String(destinationCost(destination, preferences.currency)) };
+  if (field === 'budget') return { ...preferences, budget: String(destinationCost(destination, preferences.currency, preferences.exchangeRates)) };
   if (field === 'travel') return { ...preferences, travel: String(destination.hours) };
   if (field === 'duration')
     return { ...preferences, duration: `${destination.durationDays ?? 1} day${(destination.durationDays ?? 1) === 1 ? '' : 's'}` };
@@ -322,7 +323,7 @@ export function calculateGroupCompatibility(
     ? members
     : [{ name: 'You', fitness: preferences.fitness, budget: preferences.budget, currency: preferences.currency }];
   const currency = preferences.currency ?? 'INR';
-  const cost = destinationCost(destination, currency);
+  const cost = destinationCost(destination, currency, preferences.exchangeRates);
   const budgetCap = lowestBudget(preferences, members);
   const budgetFit = cost <= budgetCap ? 100 : Math.max(0, Math.round((budgetCap / cost) * 100));
   const travelLimit = numeric(preferences.travel, 12);
@@ -496,8 +497,8 @@ export function getPlannedReturnTime(
   return finalItem ? addTime(finalItem.time, finalItem.durationMinutes) : '18:00';
 }
 
-export function buildBudgetBreakdown(destination: PlanningDestination, days: number, currency: Currency = 'INR') {
-  const cents = Math.round(destinationCost(destination, currency) * 100);
+export function buildBudgetBreakdown(destination: PlanningDestination, days: number, currency: Currency = 'INR', rates: ExchangeRates = exchangeReference) {
+  const cents = Math.round(destinationCost(destination, currency, rates) * 100);
   const transport = Math.round(cents * 0.36);
   const food = Math.round(cents * 0.27);
   const stay = days > 1 ? Math.round(cents * 0.22) : 0;
@@ -525,7 +526,7 @@ export function readinessAssessment(
   const daylightConcern = durationDays(preferences.duration) === 1 && returnTime > '19:00';
   const currency = preferences.currency ?? 'INR';
   const budgetCap = lowestBudget(preferences, members);
-  const cost = destinationCost(destination, currency);
+  const cost = destinationCost(destination, currency, preferences.exchangeRates);
   const budgetConcern = cost > budgetCap;
   const factors = [
     { label: 'Route grade', status: fitnessConflicts.length ? 'Review' : 'Within selected comfort', explanation: fitnessConflicts.length ? `${fitnessConflicts.map((member) => member.name).join(', ')} selected a lower comfort level than this illustrative grade.` : `The illustrative ${destination.difficulty.toLowerCase()} grade matches the group's selected comfort levels.` },

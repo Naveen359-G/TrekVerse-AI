@@ -6,7 +6,7 @@ export default function BudgetSummary({ destination, preferences, members }: {
   destination: PlanningDestination; preferences: PlanningPreferences; members: PlanningMember[];
 }) {
   const currency = preferences.currency ?? 'INR';
-  const cost = destinationCost(destination, currency);
+  const cost = destinationCost(destination, currency, preferences.exchangeRates);
   const cap = lowestBudget(preferences, members);
   return <div className="notice">
     <strong>Planning currency: {currency}</strong>
@@ -14,6 +14,6 @@ export default function BudgetSummary({ destination, preferences, members }: {
     <div className="budget-row"><span>Lowest limit / person</span><strong>{formatMoney(cap, currency)}</strong></div>
     <div className="budget-row"><span>Estimate · {members.length} travellers</span><strong>{formatMoney(cost * members.length, currency)}</strong></div>
     <div className="budget-row"><span>Shared ceiling · lowest limit × {members.length}</span><strong>{formatMoney(cap * members.length, currency)}</strong></div>
-    <CurrencyNote/>
+    <CurrencyNote rates={preferences.exchangeRates}/>
   </div>;
 }

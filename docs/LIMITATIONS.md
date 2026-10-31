@@ -19,7 +19,8 @@ TrekVerse AI is a planning prototype. Do not use it as a substitute for official
 
 ## Money
 
-- INR, MYR and SGD conversions use a frozen ECB reference via Frankfurter dated **2025-01-02**.
+- INR, MYR and SGD conversions default to a bundled ECB reference via Frankfurter dated **2025-01-02**. A manual refresh optionally selects the latest published reference for new plans; offline, timeout and provider errors retain the selected rates.
+- Saved trips retain their historical rate snapshots and amounts. Opening, returning to or revising a saved trip does not overwrite the rate selection for new plans. Legacy trips without snapshots retain the bundled historical reference.
 - Reference conversion does not establish a current retail exchange rate or destination price.
 - Missing legacy monetary units mean INR, even for international trips. Display currency changes must not silently relabel saved values.
 

@@ -24,10 +24,10 @@ Baseline: **2026-10-31**, after merged multi-currency support and optional onlin
 | QuestTrail | Implemented | One-time XP, completion history and badges | Local game mechanics, not independently verified trail completion |
 | TrekForGood / Impact | Implemented | Dated self-reported activity records | No impact verification, charity transfer or environmental measurement |
 | Assistant | Implemented | Keyword/rule-based contextual replies and actions | Not LLM-backed; no autonomous external actions |
-| INR / MYR / SGD | Implemented | Currency selection, conversion, formatting, consistent budget calculations and INR legacy compatibility | Frozen 2025-01-02 conversion reference; latest browser regression evidence not established here |
+| INR / MYR / SGD | Implemented | Currency selection, conversion, formatting, consistent budget calculations and INR legacy compatibility | Bundled 2025-01-02 default with optional refreshed references for new plans; not retail rates or live destination quotes |
 | Planning/currency test execution | Blocked | Twelve planning and seven currency test definitions are present | Direct Node command stops before assertions on an extensionless `currency` import; see [testing](TESTING.md) |
 | Optional online place discovery | Implemented | Explicit city search/disambiguation via Nominatim, nearby OSM candidates via Overpass, source attribution, 24-hour cache and error/empty states | Research only within 25 km; straight-line distances, not verified trips; no fitness ranking or itinerary generation for online candidates |
-| Live exchange-rate refresh | Not Started | Dated offline reference exists | Refresh work is queued separately; never mutate saved budgets silently |
+| Optional exchange-rate refresh | Implemented | Manual Frankfurter/ECB retrieval with provider, date, status and explicit errors; saved-trip historical snapshots | No automatic refresh or live retail quotes; saved amounts remain unchanged |
 | Authentication and cloud sharing | Not Started | No login required | Optional future capability, not an MVP prerequisite |
 | Booking, payments, emergency response | Not Started | No connected implementation | Exploratory only |
 | Project deck | Implemented | Nine-slide overview at `/trekverse-deck/`, including discovery, currency and connected architecture/documentation | Earlier product captures are labeled sample views; no unsupported current test-pass counts |

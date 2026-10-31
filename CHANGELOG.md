@@ -30,7 +30,7 @@ Meaningful changes are recorded here. The package currently reports `0.0.0`; no 
 
 - Native Node test execution is blocked by extensionless module resolution after the currency change.
 - Online map research is available beyond offline catalogs, but does not provide verified routes, costs or full trip planning for discovered points.
-- Exchange rates are frozen to 2025-01-02, not current rates.
+- Exchange rates default to the bundled 2025-01-02 reference. Optional manual refresh selects the latest published Frankfurter/ECB reference for new plans, with dated provenance and explicit errors. Saved trips retain historical rate snapshots and amounts; opening them does not replace the new-plan rate selection.
 - Route geometry, costs, access and readiness are illustrative; no live safety service is connected.
 
 Documentation snapshot: 2026-10-31. See [feature status](docs/FEATURE_STATUS.md) and [testing](docs/TESTING.md) for evidence and unfinished verification.

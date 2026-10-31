@@ -9,10 +9,10 @@ export default function BoundariesAndNext() {
         <p className="text-[2.35vw] leading-[1.3]">Routes, costs, and twin are illustrative; optional network lookup is not safety clearance</p>
       </div>
       <div className="absolute left-[6vw] top-[59vh] w-[42vw] h-[29vh] border-t-[0.16vw] border-primary pt-[3vh] pr-[3vw]">
-        <p className="text-[2.35vw] leading-[1.3]">Implemented today: offline catalogs, optional research, INR/MYR/SGD at frozen reference rates</p>
+        <p className="text-[2.35vw] leading-[1.3]">Implemented: offline catalogs, optional research, INR/MYR/SGD with optional rate refresh</p>
       </div>
       <div className="absolute left-[52vw] top-[59vh] w-[42vw] h-[31vh] bg-accent px-[2.4vw] py-[3vh]">
-        <p className="text-[2.35vw] leading-[1.3]"><strong>Proposed next:</strong> verified routes, live weather, shared-group collaboration, exchange-rate refresh</p>
+        <p className="text-[2.35vw] leading-[1.3]"><strong>Proposed next:</strong> verified routes, live weather, shared-group collaboration</p>
       </div>
     </div>
   );

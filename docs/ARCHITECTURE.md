@@ -21,7 +21,7 @@ flowchart TD
 
 - The original Hyderabad catalog resides in `App.tsx`; regional additions are in `lib/regional-destinations.ts`.
 - `planning.ts` contains origin resolution, hard constraints, fit factors, compatibility, itinerary generation, budget breakdown, readiness and sample profiles.
-- `currency.ts` converts using a frozen dated reference and treats missing units as INR.
+- `currency.ts` defaults to a bundled dated ECB reference and supports explicit Frankfurter refresh with validated rate snapshots. Missing monetary units mean INR. Browsing rate selection is separate from historical trip-owned rates; opening or returning to a saved trip preserves the new-plan selection.
 - `discovery.ts`, `OriginField` and `NearbyDiscovery` provide explicit-request Nominatim city search and Overpass nearby map research, with provenance, request/error handling and a 24-hour browser cache. Discovered points remain separate from ranked/plannable catalog destinations.
 - `index.css` contains the theme, layout and responsive rules.
 

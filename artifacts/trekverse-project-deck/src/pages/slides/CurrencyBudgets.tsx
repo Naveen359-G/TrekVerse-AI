@@ -11,9 +11,9 @@ export default function CurrencyBudgets() {
       <p className="absolute left-[6vw] top-[72vh] w-[46vw] text-[2vw] leading-[1.35] text-muted">Older saved trips without a currency stay in INR, whatever their city</p>
       <div className="absolute left-[60vw] top-[28vh] w-[34vw] h-[62vh] bg-primary text-bg p-[2.8vw] flex flex-col justify-center">
         <p className="text-[1.6vw] uppercase tracking-[0.12em] text-accent font-bold">Rate basis</p>
-        <p className="mt-[2vh] font-display font-extrabold text-[2.8vw] leading-[1.15]">2 Jan 2025</p>
-        <p className="mt-[2vh] text-[2vw] leading-[1.35]">Frozen ECB reference via Frankfurter</p>
-        <p className="mt-[5vh] text-[2vw] leading-[1.35]">Not live rates. Refresh not yet shipped</p>
+        <p className="mt-[2vh] font-display font-extrabold text-[2.8vw] leading-[1.15]">Offline + opt-in refresh</p>
+        <p className="mt-[2vh] text-[2vw] leading-[1.35]">Frankfurter / ECB: date and retrieval status shown</p>
+        <p className="mt-[5vh] text-[2vw] leading-[1.35]">Saved trips keep their rates. Prices are not live quotes</p>
       </div>
     </div>
   );

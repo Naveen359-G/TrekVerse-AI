@@ -29,6 +29,6 @@ The [project deck](../artifacts/trekverse-project-deck/) is served separately at
 - **Is this really AI?** Current intelligence is deterministic scoring, heuristics and a rule-based assistant; no LLM is connected.
 - **Is it safe to follow the route?** No. Terrain, timing and access are illustrative; verify independently.
 - **Can friends join remotely?** Not yet; group editing is local to this browser.
-- **Are prices and exchange rates current?** No. Prices are examples; exchange conversion uses a disclosed dated reference.
+- **Are prices and exchange rates current?** Prices are illustrative examples, never live quotes. Exchange conversion defaults to a dated offline reference, with optional manual refresh of the latest published ECB reference for new plans. Saved trips keep their historical rates and amounts.
 - **What happens offline?** Local planning calculations and stored data need no live API; first-load assets and hosted fonts can still require connectivity.
 - **What's next?** See the roadmap; distinguish implemented online map research from future verified routes, live weather and collaborative planning.

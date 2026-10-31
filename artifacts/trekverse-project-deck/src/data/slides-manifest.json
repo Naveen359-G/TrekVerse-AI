@@ -36,7 +36,7 @@
     "position": 5,
     "filepath": "src/pages/slides/CurrencyBudgets.tsx",
     "title": "Budgets in the group's currency",
-    "description": "INR, MYR, SGD with frozen ECB reference rates from 2 Jan 2025.",
+    "description": "INR, MYR, SGD with offline ECB references, optional refresh for new plans and historical saved-trip rates.",
     "speakerNotes": ""
   },
   {
