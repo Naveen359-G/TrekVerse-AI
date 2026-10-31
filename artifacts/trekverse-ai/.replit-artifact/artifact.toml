@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "TrekVerse AI"
+description = "A personal weekend adventure planner for discovering nearby treks, coordinating a group, simulating a route, adapting to disruptions, and tracking responsible outdoor missions."
+version = "1.0.0"
+id = "artifacts/trekverse-ai"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25555
+
+[services.development]
+run = "pnpm --filter @workspace/trekverse-ai run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/trekverse-ai", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/trekverse-ai/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25555"
+BASE_PATH = "/"
