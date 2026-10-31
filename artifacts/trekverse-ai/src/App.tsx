@@ -3,13 +3,15 @@ import { Activity, ArrowDownRight, ArrowLeft, ArrowRight, Backpack, BadgeCheck, 
 import { assessDestination, buildBudgetBreakdown, buildItinerary, calculateGroupCompatibility, destinationOrigin, getPlannedReturnTime, getRouteProfile, matchesOrigin, optimizeForGroup, rankDestinations, readinessAssessment, relaxPreference, resolveOrigin, type ItineraryItem, type PlanningMember } from '@/lib/planning';
 import { regionalDestinations } from '@/lib/regional-destinations';
 import OriginField from '@/components/OriginField';
+import NearbyDiscovery from '@/components/NearbyDiscovery';
+import { isDiscoveredCity, type DiscoveredCity } from '@/lib/discovery';
 import CurrencyField, { CurrencyNote } from '@/components/CurrencyField';
 import BudgetSummary from '@/components/BudgetSummary';
 import { convertBudget, currencyOrINR, destinationCost, formatMoney, lowestBudget, type Currency } from '@/lib/currency';
 
 type Screen = 'Discover' | 'My Adventures' | 'GroupSync' | 'Digital Twin' | 'Trail Intelligence' | 'PlanB' | 'QuestTrail' | 'Impact' | 'Settings';
 type Destination = { id:string; name:string; region:string; drive:number; hours:number; difficulty:string; cost:number; kind:string; mood:string[]; image:string; desc:string; durationDays?:number; minGroup?:number; maxGroup?:number; highlights?:string[]; hazards?:string[]; preparation?:string[]; dataStatus?:string; originCity?:string; };
-type Preferences = { currency:Currency; city:string; date:string; duration:string; group:string; fitness:string; budget:string; travel:string; activity:string; mood:string; needs:string; };
+type Preferences = { currency:Currency; city:string; discoveryOrigin?:DiscoveredCity; date:string; duration:string; group:string; fitness:string; budget:string; travel:string; activity:string; mood:string; needs:string; };
 type Member = {currency?:Currency;name:string;fitness:string;budget:string;activity:string;availableHours?:number;mobility?:string};
 type Contribution = {id:string;kind:string;amount:number;date:string;reported:boolean};
 type Adventure = { id?:string; destinationId:string; title:string; status:string; progress:number; checkpoint:number; checklist:string[]; xp:number; votes:Record<string,string>; members:Member[]; tasks:string[]; impact:number; date?:string; duration?:string; departureTime?:string; elapsedMinutes?:number; twinFitness?:string; revision?:number; scenarioLabel?:string; itinerary?:ItineraryItem[]; budgetBreakdown?:ReturnType<typeof buildBudgetBreakdown>; preferences?:Preferences; contributions?:Contribution[]; history?:string[]; completedQuestIds?:string[]; questHistory?:string[]; earnedBadges?:string[]; previousPlan?:{destinationId:string;date?:string;duration?:string;departureTime?:string;members:Member[];votes:Record<string,string>;tasks?:string[];checklist?:string[];status?:string;progress?:number;checkpoint?:number;elapsedMinutes?:number;twinFitness?:string;scenarioLabel?:string;preferences:Preferences}; };
@@ -26,7 +28,7 @@ const destinations:Destination[] = [
 ];
 const nextSunday=()=>{const date=new Date();const daysUntilSunday=(7-date.getDay())%7||7;date.setDate(date.getDate()+daysUntilSunday);return `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`;};
 const initialPrefs:Preferences={currency:'INR',city:'Hyderabad',date:nextSunday(),duration:'1 day',group:'4',fitness:'Easy',budget:'2000',travel:'5',activity:'Any',mood:'curious',needs:''};
-const normalizePrefs=(value:Partial<Preferences>={}):Preferences=>({...initialPrefs,...value,currency:currencyOrINR(value.currency)});
+const normalizePrefs=(value:Partial<Preferences>={}):Preferences=>({...initialPrefs,...value,currency:currencyOrINR(value.currency),discoveryOrigin:isDiscoveredCity(value.discoveryOrigin)&&value.city===value.discoveryOrigin.label?value.discoveryOrigin:undefined});
 const membersInCurrency=(members:Member[],currency:Currency)=>members.map(member=>({...member,budget:convertBudget(member.budget,member.currency??'INR',currency),currency}));
 const sizedMembers=(members:Member[],prefs:Preferences)=>{
   const size=Math.max(1,Math.min(12,Math.floor(Number(prefs.group)||1)));
@@ -96,7 +98,7 @@ function App() {
   useEffect(()=>{localStorage.setItem('tv-adventures',JSON.stringify(savedAdventures));},[savedAdventures]);
   useEffect(()=>{if(!toast)return;const t=window.setTimeout(()=>setToast(''),2600);return()=>window.clearTimeout(t);},[toast]);
   const active=destinations.find(d=>d.id===adventure.destinationId)||destinations[0];
-  const origin=resolveOrigin(prefs.city);
+  const origin=resolveOrigin(prefs.city,prefs.discoveryOrigin);
   const destinationPool=useMemo(()=>destinations.filter(d=>matchesOrigin(d,prefs.city)),[prefs.city]);
   const tripPrefs:Preferences={...normalizePrefs(adventure.preferences),city:destinationOrigin(active),group:String(adventure.members.length),date:adventure.date||initialPrefs.date,duration:adventure.duration||initialPrefs.duration};
   const tripDestinations=destinations.filter(d=>matchesOrigin(d,tripPrefs.city));
@@ -226,8 +228,8 @@ function Onboarding({prefs,setPrefs,onFinish,onDemo}:{prefs:Preferences;setPrefs
   return <main className="onboard">
     <div className="onboard-art"><div><div className="eyebrow" style={{color:'#c5e64c'}}>YOUR WEEKEND FIELDGUIDE</div><h1>Your weekend.<br/>Reimagined.</h1><p style={{maxWidth:430,color:'#dbe4d9',fontSize:14,lineHeight:1.6}}>Turn a free weekend into a nearby escape—with a plan your whole group can feel good about.</p></div></div>
     <div className="onboard-form-wrap"><form className="onboard-form" onSubmit={e=>{e.preventDefault();onFinish()}}>
-      <div className="eyebrow">01 — YOUR FIELD BRIEF</div><h2>What does outside look like?</h2><p className="subhead" style={{marginBottom:20}}>Choose a listed starting city for its nearby sample destinations. No signup, no live tracking.</p>
-      <OriginField id="onboarding-city" value={prefs.city} onChange={city=>change('city',city)}/>
+      <div className="eyebrow">01 — YOUR FIELD BRIEF</div><h2>What does outside look like?</h2><p className="subhead" style={{marginBottom:20}}>Choose a curated city for sample plans, or search globally for nearby map candidates. No signup, no live tracking.</p>
+      <OriginField id="onboarding-city" value={prefs.city} selected={prefs.discoveryOrigin} onChange={(city,discoveryOrigin)=>setPrefs({...prefs,city,discoveryOrigin})}/>
       <CurrencyField value={prefs.currency} onChange={currency=>change('currency',currency)}/>
       <div className="grid-2">
         <Field label="Weekend starts"><input type="date" value={prefs.date} onChange={e=>change('date',e.target.value)}/></Field>
@@ -240,7 +242,7 @@ function Onboarding({prefs,setPrefs,onFinish,onDemo}:{prefs:Preferences;setPrefs
         <Field label="Activity"><select value={prefs.activity} onChange={e=>change('activity',e.target.value)}><option>Any</option><option>Trek</option><option>Lake</option><option>Climb</option><option>Nature</option></select></Field>
       </div>
       <Field label="Optional needs"><input value={prefs.needs} onChange={e=>change('needs',e.target.value)} placeholder="Dietary, access, pace…"/></Field>
-      <button className="btn lime" disabled={resolveOrigin(prefs.city).kind!=='city'} type="submit" style={{width:'100%',marginTop:6}}>Build my weekend <ArrowRight size={16}/></button>
+      <button className="btn lime" disabled={resolveOrigin(prefs.city,prefs.discoveryOrigin).kind!=='city'} type="submit" style={{width:'100%',marginTop:6}}>{prefs.discoveryOrigin?'Explore nearby candidates':'Build my weekend'} <ArrowRight size={16}/></button>
       <button className="btn ghost" type="button" onClick={onDemo} style={{width:'100%',marginTop:9}}>Try Hyderabad demo adventure</button>
     </form></div>
   </main>;
@@ -258,10 +260,11 @@ function Discover({destinations:catalog,members,recommendations,excluded,prefs,s
  );
  const visibleRecommendations=recommendations;
  const visibleExcluded=excluded;
-  const origin=resolveOrigin(prefs.city);
-  if(origin.kind!=='city')return <><PageHead eyebrow="STARTING CITY REQUIRED" title="Choose where your weekend begins." description="We only show destinations from the entered starting city—never unrelated Hyderabad results."/><div className="panel"><OriginField id="discover-city" value={prefs.city} onChange={city=>setPrefs({...prefs,city})}/></div></>;
+  const origin=resolveOrigin(prefs.city,prefs.discoveryOrigin);
+  if(origin.kind!=='city'||(prefs.discoveryOrigin&&prefs.discoveryOrigin.label===prefs.city))return <><PageHead eyebrow="OPTIONAL GLOBAL DISCOVERY" title={origin.kind==='city'?`Explore around ${origin.city}.`:'Choose where your weekend begins.'} description="Curated cities work offline. Online map candidates are for research only; existing saved trips keep their starting city."/><div className="panel"><OriginField id="discover-city" value={prefs.city} selected={prefs.discoveryOrigin} onChange={(city,discoveryOrigin)=>setPrefs({...prefs,city,discoveryOrigin})}/></div>{origin.kind==='city'&&prefs.discoveryOrigin&&<NearbyDiscovery key={prefs.discoveryOrigin.id} city={prefs.discoveryOrigin}/>}</>;
  return <><section className="hero"><div className="hero-copy"><div className="eyebrow">YOUR WEEKEND. REIMAGINED.</div><h1>Find your<br/>outside.</h1><p>Nearby trails, nature escapes and a plan shaped around your time, budget and group.</p><div className="hero-actions"><button className="btn lime" onClick={()=>document.getElementById('explore')?.scrollIntoView({behavior:'smooth'})}>Explore nearby <ArrowDownRight size={15}/></button><button className="btn ghost" onClick={tryDemo}><Play size={14}/> Try Demo Adventure</button></div></div><div className="hero-stamp">FIELD NOTES · DEMO ESTIMATES</div></section>
  <PageHead eyebrow={`THE NEARBY EDIT · ${destinations.length} PLACES · ${origin.city.toUpperCase()}`} title={`Explore around ${origin.city}.`} description={`Only ${origin.city}, ${origin.country} starting-point options are shown. Travel and cost figures are sample estimates, not live routing or quotes. Planning in ${prefs.currency}.`} action={<button className="btn ghost" onClick={()=>setScreen('Settings')}>Edit weekend brief <ArrowRight size={14}/></button>}/>
+ <details className="panel" style={{marginBottom:16}}><summary>Change starting city or search globally</summary><OriginField id="discover-curated-city" value={prefs.city} selected={prefs.discoveryOrigin} onChange={(city,discoveryOrigin)=>setPrefs({...prefs,city,discoveryOrigin})}/></details>
  <div className="panel" style={{marginBottom:16}}>
    <CurrencyField value={prefs.currency} onChange={currency=>setPrefs({...prefs,currency})}/>
    <Field label={`Budget / person (${prefs.currency})`}><input aria-label="Discover budget per person" type="number" min="0" step="0.01" value={prefs.budget} onChange={e=>setPrefs({...prefs,budget:e.target.value})}/></Field>
@@ -418,10 +421,10 @@ function Impact({adventure,update,onToast,printCard,setPrintCard}:any) {
 function Settings({prefs,setPrefs,onSave,onToast,reset}:any) {
  const [saved,setSaved]=useState(false);
   return <><PageHead eyebrow="YOUR WEEKEND, YOUR TERMS" title="Settings" description="Changing the city or currency prepares a new search. Existing trips keep their original starting city, currency and amounts until you select a new destination."/><div className="grid-2"><div className="panel"><div className="eyebrow">PREFERENCE BRIEF</div><h2>What should the next plan feel like?</h2>
-  <OriginField id="settings-city" value={prefs.city} onChange={city=>{setPrefs({...prefs,city});setSaved(false);}}/>
+  <OriginField id="settings-city" value={prefs.city} selected={prefs.discoveryOrigin} onChange={(city,discoveryOrigin)=>{setPrefs({...prefs,city,discoveryOrigin});setSaved(false);}}/>
   <CurrencyField value={prefs.currency} onChange={currency=>{setPrefs({...prefs,currency});setSaved(false);}}/>
   <div className="grid-2" style={{gridTemplateColumns:'1fr 1fr',gap:'0 14px',marginTop:18}}>{[['Weekend date','date'],['Duration','duration'],['Group size','group'],['Fitness comfort','fitness'],[`Budget / person (${prefs.currency})`,'budget'],['Max drive (hours)','travel'],['Activity','activity'],['Mood','mood']].map(([label,key])=><Field label={label} key={key}>{key==='budget'||key==='date'||key==='group'?<input aria-label={label} min={key==='group'?1:0} max={key==='group'?12:undefined} step={key==='budget'?'0.01':undefined} type={key==='date'?'date':'number'} value={prefs[key]} onChange={e=>setPrefs({...prefs,[key]:e.target.value})}/>:<select value={prefs[key]} onChange={e=>setPrefs({...prefs,[key]:e.target.value})}>{(key==='duration'?['1 day','2 days','3 days']:key==='fitness'?['Easy','Moderate','Experienced']:key==='travel'?['3','5','8','12']:key==='activity'?['Any','Trek','Lake','Climb','Nature']:['quiet','reset','curious','bold','challenge']).map(v=><option key={v} value={v}>{v==='12'?'Flexible':v}</option>)}</select>}</Field>)}</div>
-  <Field label="Optional needs"><input value={prefs.needs} onChange={e=>setPrefs({...prefs,needs:e.target.value})} placeholder="Pace, access, food…"/></Field><button className="btn lime" disabled={resolveOrigin(prefs.city).kind!=='city'||prefs.budget.trim()===''||Number(prefs.budget)<0} onClick={()=>{onSave();setSaved(true);}}><Check size={14}/> Save brief and show matching places</button>{saved&&<span className="success" style={{display:'inline-block',marginLeft:10}}>Saved</span>}</div>
+  <Field label="Optional needs"><input value={prefs.needs} onChange={e=>setPrefs({...prefs,needs:e.target.value})} placeholder="Pace, access, food…"/></Field><button className="btn lime" disabled={resolveOrigin(prefs.city,prefs.discoveryOrigin).kind!=='city'||prefs.budget.trim()===''||Number(prefs.budget)<0} onClick={()=>{onSave();setSaved(true);}}><Check size={14}/> Save brief and show matching places</button>{saved&&<span className="success" style={{display:'inline-block',marginLeft:10}}>Saved</span>}</div>
  <div><div className="panel"><div className="eyebrow">YOUR DATA</div><h2>Local by default.</h2><p className="subhead">This demo stores your preferences, saved places, itinerary and progress in localStorage. There is no signup or external API.</p><div className="time-row"><CheckCircle2 size={15}/><span>No account or location tracking</span></div><div className="time-row"><CheckCircle2 size={15}/><span>Demo estimates are not live verified</span></div><div className="time-row"><CheckCircle2 size={15}/><span>Reset clears local demo data</span></div><button className="btn danger" style={{marginTop:17}} onClick={reset}><RotateCcw size={14}/> Reset all demo progress</button></div><div className="notice"><strong>Before each trip:</strong> confirm transport, local access, weather and official advisories from reliable sources. Never use this demo as a substitute for navigation or emergency guidance.</div></div></div></>;
 }
 

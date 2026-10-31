@@ -7,7 +7,15 @@ Keep the MVP usable without mandatory external APIs or authentication. Trip data
 
 **Why:** The product brief prioritizes a working, self-contained MVP and explicitly rejects mandatory API or auth dependencies; its sample destination data is not live-verified.
 
-**How to apply:** Preserve local persistence and clear demo-data disclaimers when adding planning, recommendation, route, or readiness features. Treat live services as optional future integrations.
+**How to apply:** Preserve local persistence and clear demo-data disclaimers when adding planning, recommendation, route, or readiness features. Live discovery must remain opt-in and must not become a prerequisite for curated planning.
+
+## Map discovery is not trip verification
+
+Treat map-sourced nearby places as research candidates, separate from graded/scored trip plans, until route, timing, costs and access have their own evidence. A mapped peak or park is not evidence of a hiking route, fitness grade, public entry, or safety clearance.
+
+**Why:** Global place sources provide locations and feature tags, not the route and access evidence needed to make those claims. Reusing the sample itinerary or route-profile defaults would invent those details.
+
+**How to apply:** Keep unknowns explicit and preserve source links. Do not pass raw map candidates into sample planning/scoring machinery just to make them selectable as complete trips.
 
 ## Starting-city correctness
 

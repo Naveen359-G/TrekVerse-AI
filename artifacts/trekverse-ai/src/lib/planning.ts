@@ -1,4 +1,5 @@
 import { destinationCost, formatMoney, lowestBudget, type Currency } from './currency';
+import { isDiscoveredCity, type DiscoveredCity } from './discovery';
 export type FitnessLevel = 'Easy' | 'Moderate' | 'Experienced';
 
 export const supportedOrigins = [
@@ -16,8 +17,13 @@ export const supportedOrigins = [
 
 const normalizeCity = (value: string) => value.normalize('NFKC').trim().toLowerCase().replace(/[,.]/g, ' ').replace(/\s+/g, ' ');
 
-export function resolveOrigin(value: string) {
+export function resolveOrigin(value: string, selected?: DiscoveredCity) {
   const key = normalizeCity(value);
+  if (isDiscoveredCity(selected) && value === selected.label) return {
+    kind: 'city' as const, city: selected.label, country: selected.country,
+    message: 'Online city selected. Nearby map candidates are not verified trips. Route, time, grade, price and access are unknown.',
+    suggestions: [] as string[],
+  };
   const origin = supportedOrigins.find(item => normalizeCity(item.city) === key || item.aliases.includes(key));
   if (origin) return { kind: 'city' as const, city: origin.city, country: origin.country, message: `Showing sample destinations around ${origin.city}, ${origin.country}. Local currency: ${origin.country === 'Malaysia' ? 'MYR' : origin.country === 'Singapore' ? 'SGD' : 'INR'}. Choose your planning currency separately.`, suggestions: [] as string[] };
   if (['malaysia', 'malaysis', 'malasia', 'malyasia', 'malayasia'].includes(key)) {
@@ -26,7 +32,7 @@ export function resolveOrigin(value: string) {
   if (['india', 'bharat'].includes(key)) {
     return { kind: 'country' as const, city: '', country: 'India', message: 'India is a country. Choose your starting city.', suggestions: ['Hyderabad', 'Bengaluru', 'Mumbai', 'Pune', 'Delhi', 'Chennai'] };
   }
-  return { kind: key ? 'unsupported' as const : 'empty' as const, city: '', country: '', message: key ? `We do not have a local destination catalog for “${value.trim()}” yet. Choose a listed city; we will not substitute Hyderabad results.` : 'Enter a starting city, not a country.', suggestions: [] as string[] };
+  return { kind: key ? 'unsupported' as const : 'empty' as const, city: '', country: '', message: key ? `No curated catalog for “${value.trim()}”. Choose a listed city or explicitly search online and select the correct city below. We never substitute another city’s destinations.` : 'Enter a starting city, not a country.', suggestions: [] as string[] };
 }
 
 export const destinationOrigin = (destination: { originCity?: string }) => destination.originCity || 'Hyderabad';
