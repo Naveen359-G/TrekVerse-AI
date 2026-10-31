@@ -1,0 +1,1 @@
+- [TrekVerse MVP scope](trekverse-mvp-scope.md) — keep the MVP local-first, API/auth-optional, and explicit about unverified route and safety data.
