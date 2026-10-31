@@ -1,0 +1,50 @@
+[
+  {
+    "id": "4e6c0be6-b6de-4ee1-94af-e1f3da86c901",
+    "position": 1,
+    "filepath": "src/pages/slides/TrekVerseCover.tsx",
+    "title": "TrekVerse AI",
+    "description": "The intelligent weekend adventure OS, in the app's forest-green and lime identity.",
+    "speakerNotes": ""
+  },
+  {
+    "id": "805dd534-9552-4e28-9d17-d32d454f08eb",
+    "position": 2,
+    "filepath": "src/pages/slides/PlanningProblem.tsx",
+    "title": "The weekend planning problem",
+    "description": "Budgets, preferences, changing plans, and scattered trip details.",
+    "speakerNotes": ""
+  },
+  {
+    "id": "71c064d9-dcba-4f77-89c7-77913e92232c",
+    "position": 3,
+    "filepath": "src/pages/slides/DemoJourney.tsx",
+    "title": "The demo weekend journey",
+    "description": "The four-person Hyderabad to Ananthagiri Hills demo with actual product imagery.",
+    "speakerNotes": ""
+  },
+  {
+    "id": "bec79b68-17bf-4af7-b621-0625091ba397",
+    "position": 4,
+    "filepath": "src/pages/slides/GroupAndPlanB.tsx",
+    "title": "GroupSync and PlanB",
+    "description": "Group compatibility, separate votes, and reversible scenario-based alternatives.",
+    "speakerNotes": ""
+  },
+  {
+    "id": "44ca3453-1d06-495d-b26b-d2b3f551fa61",
+    "position": 5,
+    "filepath": "src/pages/slides/TrailExperience.tsx",
+    "title": "The simulated trail experience",
+    "description": "Digital Twin, QuestTrail, Impact, and browser-local progress.",
+    "speakerNotes": ""
+  },
+  {
+    "id": "c1a97f2a-b4b0-49c3-859d-2df210242f1c",
+    "position": 6,
+    "filepath": "src/pages/slides/BoundariesAndNext.tsx",
+    "title": "MVP boundaries and next steps",
+    "description": "Local-first boundaries, validation, illustrative data, and proposed integrations.",
+    "speakerNotes": ""
+  }
+]

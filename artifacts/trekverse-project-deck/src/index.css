@@ -1,0 +1,62 @@
+@import 'tailwindcss';
+
+@theme inline {
+  --color-primary: var(--slide-primary);
+  --color-accent: var(--slide-accent);
+  --color-bg: var(--slide-bg);
+  --color-text: var(--slide-text);
+  --color-muted: var(--slide-muted);
+  --font-display: var(--font-display-family);
+  --font-body: var(--font-body-family);
+}
+
+:root {
+  --slide-primary: #18382d;
+  --slide-accent: #c5e64c;
+  --slide-bg: #f4f1e8;
+  --slide-text: #20352d;
+  --slide-muted: #66786c;
+  --font-display-family: 'Manrope', sans-serif;
+  --font-body-family: 'DM Sans', sans-serif;
+  color-scheme: light;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--slide-bg);
+  color: var(--slide-text);
+}
+
+.slide {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.slide-viewer {
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+* { box-sizing: border-box; }
+h1, p, ul { margin: 0; }
+h1 { text-wrap: balance; }
+p, li { text-wrap: pretty; }
+.deck-grain {
+  background-image: linear-gradient(135deg, #f4f1e8, #eceee0);
+}
+.cover-wash {
+  background: linear-gradient(90deg, #f4f1e8 0%, #f4f1e8 46%, #f4f1e8e8 51%, #18382d08 68%, #18382d28 100%);
+}
+.product-shot {
+  border: 0.12vw solid #d4d9ca;
+  box-shadow: 0 1.2vh 3vw #18382d12;
+}

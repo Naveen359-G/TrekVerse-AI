@@ -1,0 +1,28 @@
+kind = "slides"
+previewPath = "/trekverse-deck/"
+title = "TrekVerse AI — Project Overview"
+description = "A six-slide overview of TrekVerse AI: weekend planning, the demo journey, GroupSync and PlanB, simulated trail experience, MVP boundaries and proposed next steps."
+version = "1.0.0"
+id = "artifacts/trekverse-project-deck"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/trekverse-deck/" ]
+localPort = 19808
+
+[services.development]
+run = "pnpm --filter @workspace/trekverse-project-deck run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/trekverse-project-deck", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/trekverse-project-deck/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "19808"
+BASE_PATH = "/trekverse-deck/"
