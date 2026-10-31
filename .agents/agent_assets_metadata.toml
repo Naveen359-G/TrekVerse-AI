@@ -1,0 +1,16 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "9hK0ajD96Wq9SXdPIHN5X"
+uri = "file://docs/TrekVerse-AI-Project-Overview.pptx"
+type = "slides"
+title = "TrekVerse AI — Project Overview (PowerPoint)"
+description = "Nine-slide presentation, saved in the docs folder."
+logical_id = "ae9cf88f-a369-4792-9e59-68a3294c9b2b"
+content_hash = "sha256:2ffd8cb86a130bdcc1c6b02a9338a16401be1e2659547415cebcbc5f50bc9da5"
+size = 6988903
+mtime_ms = 1793463338740
+storage_uri = "gcs://replit-rams-assets-pike/rams/assets/repl:4b30b3b1-8ce6-43dd-af40-48a1fac70448/ae9cf88f-a369-4792-9e59-68a3294c9b2b/92e3d400-5103-4ee5-adf8-f96438f1457d"
+storage_version_token = "1793463348868436"
+content_type = "application/vnd.openxmlformats-officedocument.presentationml.presentation"

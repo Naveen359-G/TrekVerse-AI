@@ -48,6 +48,7 @@ The web MVP requires no account, API key or database. The repository also contai
 
 - Application: the workspace's web Preview at `/`.
 - Updated nine-slide project deck: `/trekverse-deck/`.
+- PowerPoint snapshot: [docs/TrekVerse-AI-Project-Overview.pptx](docs/TrekVerse-AI-Project-Overview.pptx) (generated export, excluded from Git and deployment; editable source remains in the slides artifact).
 - No published URL is recorded here; the workspace preview is a development address.
 
 ![My Adventures interface](artifacts/trekverse-project-deck/public/my-adventures.jpg)

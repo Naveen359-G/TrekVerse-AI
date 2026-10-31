@@ -53,3 +53,6 @@ Thumbs.db
 # Replit
 .cache/
 .local/
+
+# Generated presentation export; editable slide source remains versioned.
+/docs/TrekVerse-AI-Project-Overview.pptx
