@@ -39,6 +39,13 @@
 
 :root { --forest:#18382d; --forest-2:#244a3a; --lime:#c5e64c; --paper:#f4f1e8; --ink:#20352d; --muted-ink:#718077; }
 * { box-sizing:border-box; }
+.origin-help { font-size:12px; line-height:1.5; color:var(--muted-ink); margin:7px 0 0; }
+.origin-error { color:#914a2f; }
+.origin-field { margin-top:16px; }
+.origin-field .filters { margin:9px 0 0; }
+.origin-trip-notice { display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:18px; }
+.btn:disabled { opacity:.5; cursor:not-allowed; transform:none; }
+.origin-field input[aria-invalid="true"] { border-color:#ac6c50; }
 body { background:var(--paper); }
 button, input, select { font:inherit; }
 button { cursor:pointer; }

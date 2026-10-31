@@ -1,5 +1,39 @@
 export type FitnessLevel = 'Easy' | 'Moderate' | 'Experienced';
 
+export const supportedOrigins = [
+  { city: 'Hyderabad', country: 'India', aliases: ['hyd', 'hyderabad india', 'hyderabad telangana'] },
+  { city: 'Kuala Lumpur', country: 'Malaysia', aliases: ['kl', 'kuala lumpur malaysia', 'kuala lumpur city'] },
+  { city: 'George Town', country: 'Malaysia', aliases: ['penang', 'georgetown', 'george town penang', 'george town malaysia', 'penang malaysia'] },
+  { city: 'Johor Bahru', country: 'Malaysia', aliases: ['jb', 'johor bahru malaysia', 'johor bharu'] },
+  { city: 'Bengaluru', country: 'India', aliases: ['bangalore', 'bengaluru india', 'bangalore india'] },
+  { city: 'Mumbai', country: 'India', aliases: ['bombay', 'mumbai india'] },
+  { city: 'Pune', country: 'India', aliases: ['pune india'] },
+  { city: 'Delhi', country: 'India', aliases: ['new delhi', 'delhi india', 'new delhi india'] },
+  { city: 'Chennai', country: 'India', aliases: ['madras', 'chennai india'] },
+  { city: 'Singapore', country: 'Singapore', aliases: ['singapore city'] },
+];
+
+const normalizeCity = (value: string) => value.normalize('NFKC').trim().toLowerCase().replace(/[,.]/g, ' ').replace(/\s+/g, ' ');
+
+export function resolveOrigin(value: string) {
+  const key = normalizeCity(value);
+  const origin = supportedOrigins.find(item => normalizeCity(item.city) === key || item.aliases.includes(key));
+  if (origin) return { kind: 'city' as const, city: origin.city, country: origin.country, message: `Showing sample destinations around ${origin.city}, ${origin.country}. All budgets remain in INR (₹).`, suggestions: [] as string[] };
+  if (['malaysia', 'malaysis', 'malasia', 'malyasia', 'malayasia'].includes(key)) {
+    return { kind: 'country' as const, city: '', country: 'Malaysia', message: 'Malaysia is a country. Choose your actual starting city so we can show nearby places.', suggestions: ['Kuala Lumpur', 'George Town', 'Johor Bahru'] };
+  }
+  if (['india', 'bharat'].includes(key)) {
+    return { kind: 'country' as const, city: '', country: 'India', message: 'India is a country. Choose your starting city.', suggestions: ['Hyderabad', 'Bengaluru', 'Mumbai', 'Pune', 'Delhi', 'Chennai'] };
+  }
+  return { kind: key ? 'unsupported' as const : 'empty' as const, city: '', country: '', message: key ? `We do not have a local destination catalog for “${value.trim()}” yet. Choose a listed city; we will not substitute Hyderabad results.` : 'Enter a starting city, not a country.', suggestions: [] as string[] };
+}
+
+export const destinationOrigin = (destination: { originCity?: string }) => destination.originCity || 'Hyderabad';
+export function matchesOrigin(destination: { originCity?: string }, city: string) {
+  const origin = resolveOrigin(city);
+  return origin.kind === 'city' && origin.city === destinationOrigin(destination);
+}
+
 export type PlanningMember = {
   name: string;
   fitness: string;
@@ -39,6 +73,7 @@ export type PlanningDestination = {
   hazards?: string[];
   preparation?: string[];
   dataStatus?: string;
+  originCity?: string;
 };
 
 export type ScoreFactor = {
@@ -95,6 +130,9 @@ export function assessDestination<T extends PlanningDestination>(
   const daysNeeded = destination.durationDays ?? 1;
   const hardIssues: DestinationAssessment<T>['hardIssues'] = [];
 
+  if (!matchesOrigin(destination, preferences.city)) {
+    hardIssues.push({ code: 'origin', message: `These travel estimates start from ${destinationOrigin(destination)}, not “${preferences.city}”. Choose a destination from your starting city.`, canRelax: false });
+  }
   if (destination.cost > groupBudget) {
     hardIssues.push({
       code: 'budget',
@@ -171,7 +209,6 @@ export function assessDestination<T extends PlanningDestination>(
   const groupRangeFit =
     groupSize >= (destination.minGroup ?? 1) &&
     groupSize <= (destination.maxGroup ?? 12);
-  const locationKnown = preferences.city.trim().toLowerCase() === 'hyderabad';
 
   const factors: ScoreFactor[] = [
     {
@@ -185,7 +222,7 @@ export function assessDestination<T extends PlanningDestination>(
     {
       label: 'Travel',
       score: destination.hours <= travelLimit ? 100 : 20,
-      explanation: `${destination.hours} illustrative travel hours against a ${travelLimit}-hour limit${locationKnown ? ' from Hyderabad' : '; distance assumptions are from Hyderabad, not your entered city'}.`,
+      explanation: `${destination.hours} illustrative travel hours from ${destinationOrigin(destination)} against a ${travelLimit}-hour limit.`,
     },
     {
       label: 'Duration',
@@ -244,7 +281,7 @@ export function rankDestinations<T extends PlanningDestination>(
   preferences: PlanningPreferences,
   members: PlanningMember[],
 ) {
-  const assessments = destinations.map((destination) =>
+  const assessments = destinations.filter(destination => matchesOrigin(destination, preferences.city)).map((destination) =>
     assessDestination(destination, preferences, members),
   );
   const sortByScore = (a: DestinationAssessment<T>, b: DestinationAssessment<T>) =>
@@ -363,7 +400,7 @@ export function optimizeForGroup<T extends PlanningDestination>(
   preferences: PlanningPreferences,
   members: PlanningMember[],
 ) {
-  const scored = destinations
+  const scored = destinations.filter(destination => matchesOrigin(destination, preferences.city))
     .map((destination) => ({
       destination,
       compatibility: calculateGroupCompatibility(destination, preferences, members),
@@ -418,7 +455,7 @@ export function buildItinerary(
   };
   const mood = moodPlan[preferences.mood] ?? moodPlan.curious;
   const itinerary: ItineraryItem[] = [
-    { id: 'depart', day: 1, time: departureTime, title: `Depart ${preferences.city || 'starting city'}`, detail: `Illustrative outbound travel estimate: about ${outboundMinutes} minutes.`, durationMinutes: outboundMinutes },
+    { id: 'depart', day: 1, time: departureTime, title: `Depart ${destinationOrigin(destination)}`, detail: `Illustrative outbound travel estimate: about ${outboundMinutes} minutes.`, durationMinutes: outboundMinutes },
     { id: 'arrival', day: 1, time: firstArrival, title: 'Arrival and local check-in', detail: 'Confirm access, permissions, weather and the group turnaround plan locally.', durationMinutes: 30 },
     { id: 'activity', day: 1, time: activityStart, title: `${mood.title} · ${destination.kind}`, detail: `${destination.name}: ${mood.detail} Keep the pace within the group's comfort and take breaks.`, durationMinutes: activityMinutes },
   ];
