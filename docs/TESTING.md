@@ -37,6 +37,7 @@ These are DOM integration tests, not real-browser layout, cross-tab, network-pro
 
 | Date | Scope | Outcome |
 | --- | --- | --- |
+| 2026-10-31 | Vercel hosting preparation | Frozen-lockfile dependency install passed; `build:vercel` passed with `PORT`, `BASE_PATH`, `REPL_ID` and `NODE_ENV` unset; 39 regression tests and test typecheck passed; output/asset checks passed. Actual Vercel deployment not run. |
 | 2026-10-31 | Earlier origin-filtering implementation: 12 planning tests | Passed before the currency merge; historical evidence only |
 | 2026-10-31 | Earlier origin-switch browser journey, desktop and 390px | Passed: country guidance, Malaysian-only results, saved KL origin retained after Hyderabad search, unsupported city empty state |
 | 2026-10-31 | Current merged app: product typecheck | Passed during this documentation update |

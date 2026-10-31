@@ -34,7 +34,7 @@ For API changes, inspect `lib/api-spec/openapi.yaml` first, update the contract 
 
 ## Verification
 
-Run the product typecheck and affected logic checks. Build when runtime code or packaging changes. See `docs/TESTING.md` for the current test-runner blocker; do not report unexecuted assertions as passing.
+Run the product typecheck and affected logic checks. Build when runtime code or packaging changes. Use the product's explicit tsx test scripts documented in `docs/TESTING.md`, not the older native Node invocation. Do not report unexecuted assertions as passing.
 
 For UI changes, verify the relevant screen and mobile layout. Use proportionate browser testing for changed saved-data, authentication or payment journeys; documentation-only work does not require a browser test. Restart the existing managed workflow after runtime changes, not after Markdown edits.
 

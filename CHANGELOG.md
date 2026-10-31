@@ -6,6 +6,9 @@ Meaningful changes are recorded here. The package currently reports `0.0.0`; no 
 
 ### Added
 
+- Repository-root Vercel configuration, pinned Node/pnpm metadata and an app-only deployment build command.
+- Static-host Vite defaults and a Vercel guide covering monorepo installation, routing, external providers and browser-origin data isolation.
+
 - Repeatable saved-trip currency/migration regressions against the actual React app, with isolated storage and coverage for INR/MYR/SGD save/open/reload/duplicate, PlanB acceptance/restoration and mixed member budgets.
 - Product test scripts and the `trekverse-regressions` validation gate using an explicit TypeScript/JSX runner.
 - Origin-specific sample catalogs for ten cities with explicit country-to-city guidance.

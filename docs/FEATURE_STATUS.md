@@ -14,6 +14,7 @@ Baseline: **2026-10-31**, after merged multi-currency support and optional onlin
 
 | Module / capability | Status | What exists | Simulation, gap or next action |
 | --- | --- | --- | --- |
+| Vercel hosting configuration | Implemented | Root configuration, app-only build, static-host defaults and deployment guide | Actual Vercel deployment/URL smoke check remains user-initiated; optional API and slides are not included |
 | EscapeOS: brief and Discover | Implemented | Ten origin-specific catalogs; budget, travel, duration and group constraints; explanations, comparison and bookmarks | Curated examples, not worldwide discovery; activity and mood influence fit rather than universal hard exclusions |
 | Origin correctness | Tested | Country/typo guidance, no unrelated fallback, origin-preserving saved plans | Desktop/mobile browser journey passed before the currency merge on 2026-10-31; rerun if related code changes |
 | My Adventures | Implemented | Dated itinerary, budget breakdown, local save/open/update/duplicate/delete | No cloud backup or cross-device sync |

@@ -46,6 +46,8 @@ The web MVP requires no account, API key or database. The repository also contai
 
 ## Preview and presentation
 
+For a separate Vercel deployment, use the repository-root [`vercel.json`](vercel.json) and [Vercel setup guide](docs/VERCEL.md). No server or secrets are required for the main static app.
+
 - Application: the workspace's web Preview at `/`.
 - Updated nine-slide project deck: `/trekverse-deck/`.
 - PowerPoint snapshot: [docs/TrekVerse-AI-Project-Overview.pptx](docs/TrekVerse-AI-Project-Overview.pptx) (generated export, excluded from Git and deployment; editable source remains in the slides artifact).

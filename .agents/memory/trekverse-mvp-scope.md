@@ -24,3 +24,11 @@ Treat map-sourced nearby places as research candidates, separate from graded/sco
 **Why:** The user reported that entering a different starting location still returned Hyderabad-area places.
 
 **How to apply:** Apply origin matching to recommendations and alternatives, not just headings. Changing search preferences must not rewrite the origin of an existing saved trip.
+
+## Dual hosting
+
+Support the application on both Replit and Vercel.
+
+**Why:** The user said they will host the application on Vercel as well.
+
+**How to apply:** Preserve the Replit preview while maintaining a portable production build. Do not introduce a mandatory Replit-only runtime dependency without addressing the Vercel deployment.
