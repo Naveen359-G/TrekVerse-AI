@@ -20,7 +20,9 @@ TrekVerse AI is a local-first planning prototype for groups with different budge
 | QuestTrail | QuestTrail | One-time XP rewards and achievement history |
 | TrekForGood | Impact | Dated, self-reported contributions |
 
-The current catalog covers Hyderabad, Bengaluru, Mumbai, Pune, Delhi, Chennai, Kuala Lumpur, George Town/Penang, Johor Bahru and Singapore. Country names require an actual starting city; unsupported cities do not fall back to Hyderabad.
+The offline catalog covers Hyderabad, Bengaluru, Mumbai, Pune, Delhi, Chennai, Kuala Lumpur, George Town/Penang, Johor Bahru and Singapore. Country names require an actual starting city; unsupported cities do not fall back to Hyderabad.
+
+Optional online city search (Nominatim) and nearby map discovery (Overpass/OpenStreetMap) extend research beyond those catalogs. Users explicitly choose a city and run the search. Nearby points within 25 km are research candidates only: straight-line distance, unknown route/cost/grade/access, and no generated itinerary. Results include attribution and a 24-hour cache.
 
 Budgets support INR, MYR and SGD. Conversion uses a disclosed **2025-01-02 reference**, not current exchange rates. Legacy records without a currency remain INR.
 
@@ -45,7 +47,7 @@ The web MVP requires no account, API key or database. The repository also contai
 ## Preview and presentation
 
 - Application: the workspace's web Preview at `/`.
-- Project deck: `/trekverse-deck/`.
+- Updated nine-slide project deck: `/trekverse-deck/`.
 - No published URL is recorded here; the workspace preview is a development address.
 
 ![My Adventures interface](artifacts/trekverse-project-deck/public/my-adventures.jpg)

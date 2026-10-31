@@ -22,6 +22,7 @@ flowchart TD
 - The original Hyderabad catalog resides in `App.tsx`; regional additions are in `lib/regional-destinations.ts`.
 - `planning.ts` contains origin resolution, hard constraints, fit factors, compatibility, itinerary generation, budget breakdown, readiness and sample profiles.
 - `currency.ts` converts using a frozen dated reference and treats missing units as INR.
+- `discovery.ts`, `OriginField` and `NearbyDiscovery` provide explicit-request Nominatim city search and Overpass nearby map research, with provenance, request/error handling and a 24-hour browser cache. Discovered points remain separate from ranked/plannable catalog destinations.
 - `index.css` contains the theme, layout and responsive rules.
 
 ## Shared state and persistence
@@ -31,6 +32,8 @@ Preferences represent the current discovery brief. The active adventure has its 
 React effects persist preferences, the active adventure, bookmarks and saved adventures to browser storage. Load helpers normalize older records. There is no server synchronization, transactional persistence layer or cloud backup.
 
 A changed search origin selects a new candidate pool, not a relabeled active trip. Trip screens use the trip's own origin context. The same distinction applies to stored currency: absence means INR regardless of location.
+
+Optional online discovery sends the typed city or selected coordinates to public map providers, not the trip roster or budgets. Its separate cache uses the `tv-discovery-v1:` key prefix. Online candidates have unknown routing, grade, access and cost; they are not passed into itinerary generation.
 
 ## PlanB propagation
 

@@ -29,7 +29,7 @@ Read [AGENTS.md](AGENTS.md) for coding guardrails and required documentation mai
 ## Where things live
 
 - `artifacts/trekverse-ai/` — product application and tests
-- `artifacts/trekverse-project-deck/` — six-slide project presentation
+- `artifacts/trekverse-project-deck/` — nine-slide project presentation
 - `artifacts/api-server/` and `lib/` — backend/shared workspace scaffolding
 - `docs/` — requirements, architecture, feature status, demo, models, verification and limitations
 

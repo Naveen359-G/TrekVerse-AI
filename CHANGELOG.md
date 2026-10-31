@@ -11,6 +11,8 @@ Meaningful changes are recorded here. The package currently reports `0.0.0`; no 
 - Simulated route progress, one-time quest rewards and dated self-reported impact.
 - INR, MYR and SGD budget selection, conversion and formatting with a disclosed fixed-date reference.
 - Structured product, technical, demo, testing and safety Markdown documentation.
+- Optional Nominatim city search and Overpass nearby map research with disambiguation, attribution, 24-hour caching and explicit research-only boundaries.
+- Expanded project deck from six to nine slides, covering city discovery, multi-currency planning and connected architecture/documentation.
 
 ### Changed
 
@@ -27,7 +29,7 @@ Meaningful changes are recorded here. The package currently reports `0.0.0`; no 
 ### Known issues
 
 - Native Node test execution is blocked by extensionless module resolution after the currency change.
-- Global discovery is in progress separately; the merged catalog is not worldwide coverage.
+- Online map research is available beyond offline catalogs, but does not provide verified routes, costs or full trip planning for discovered points.
 - Exchange rates are frozen to 2025-01-02, not current rates.
 - Route geometry, costs, access and readiness are illustrative; no live safety service is connected.
 

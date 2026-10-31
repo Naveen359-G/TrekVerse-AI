@@ -28,8 +28,9 @@ node --experimental-strip-types --test artifacts/trekverse-ai/tests/*.test.mts
 | 2026-10-31 | Current merged app: product typecheck | Passed during this documentation update |
 | 2026-10-31 | Current merged app: direct Node invocation of both test files | Blocked before assertions by `ERR_MODULE_NOT_FOUND` for `src/lib/currency` |
 | 2026-10-31 | Current merged app: browser currency and complete PlanB regression pass | Not run in this documentation update |
+| 2026-10-31 | Updated nine-slide project deck | Slide validation, deck typecheck and production build passed; `/allslides` rendered nine 1920×1080 frames with loaded images and no intersecting text blocks; updated cover captured |
 
-There are **12 planning and 7 currency test definitions** at this baseline. Do not report all 19 as passing until the runner issue is resolved and assertions execute.
+There are **12 planning, 7 currency and 9 discovery test definitions** after the optional discovery merge. The discovery cases were not executed during the slide refresh. Do not report all 28 as passing until a working runner executes the relevant assertions.
 
 ## Coverage inventory
 

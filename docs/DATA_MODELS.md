@@ -54,5 +54,8 @@ Example only; runtime onboarding chooses a future date rather than fixing the da
 | `tv-adventures` | Saved adventure array as JSON |
 | `tv-saved` | Bookmarked destination ID array as JSON |
 | `tv-onboard` | Completion marker `done` |
+| `tv-discovery-v1:*` | Optional city/place result caches with fetch timestamps and a 24-hour validity window |
+
+Online discovery has separate `DiscoveredCity` (id, label, country, lat, lon, sourceUrl), `NearbyPlace` (id, name, kind, lat, lon, distanceKm, sourceUrl) and `DiscoveryResult<T>` (items, fetchedAt, cached) contracts in `src/lib/discovery.ts`. A map candidate is not a `Destination` with known travel/cost/grade assumptions.
 
 Normalization supports older local records. Missing currency means INR in preferences, members and restored contexts; preserve that interpretation even when the origin is international. There is no documented stable external API or versioned database schema for these objects.

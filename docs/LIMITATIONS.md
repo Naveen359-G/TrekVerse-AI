@@ -4,7 +4,8 @@ TrekVerse AI is a planning prototype. Do not use it as a substitute for official
 
 ## Data and location
 
-- The merged app uses curated sample destinations for ten starting cities, not worldwide live discovery.
+- Full trip planning uses curated sample destinations for ten starting cities. Optional online discovery can find cities and nearby mapped points outside those catalogs, but is not complete worldwide destination coverage.
+- Online results are research only within 25 km of the selected city, with straight-line distances and unknown route/cost/grade/access. They do not generate itineraries or fitness rankings. Provider availability and map completeness are not guaranteed.
 - Country names are not city origins. Unsupported locations must not receive unrelated fallback trips.
 - Travel distances/times, activity grades, costs and access details are illustrative assumptions, not verified routing, quotes or current permissions.
 - Images may be representative rather than photographs of the named place.

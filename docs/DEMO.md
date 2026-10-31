@@ -14,7 +14,7 @@ Use an isolated demo browser profile. Do not reset someone else's saved plans.
 4. **1:50–2:40 — Adapt deliberately.** Open PlanB and preview “Departure is two hours late.” Show what changes before applying. Apply, inspect the itinerary/readiness, then restore the prior version. If a scenario has no feasible option, explain the empty state rather than presenting an infeasible option as compliant.
 5. **2:40–3:20 — Simulate, don't navigate.** Open Digital Twin, start briefly, pause and show checkpoints. Call it an accelerated simulation, not live movement.
 6. **3:20–4:00 — Finish the story.** Show readiness preparation, a QuestTrail action and dated self-reported Impact entries. State that progress and saved plans remain in this browser.
-7. **Optional 4:00–5:00 — Location and currency.** In Settings enter “Malaysis.” Show country-to-city guidance; choose Kuala Lumpur and save the brief. Confirm Malaysian options and preservation of the old trip. Show the currency selector and dated exchange-reference disclosure; do not call conversion a live quote.
+7. **Optional 4:00–5:00 — Location and currency.** In Settings enter “Malaysis.” Show country-to-city guidance; choose Kuala Lumpur and save the brief. Confirm Malaysian options and preservation of the old trip. Show the currency selector and dated exchange-reference disclosure; do not call conversion a live quote. If demonstrating online discovery, explicitly search/select a city and find nearby places; call the results unverified map research, not generated trips. Have the offline demo ready if a provider is unavailable.
 
 ## Standout features
 
@@ -31,4 +31,4 @@ The [project deck](../artifacts/trekverse-project-deck/) is served separately at
 - **Can friends join remotely?** Not yet; group editing is local to this browser.
 - **Are prices and exchange rates current?** No. Prices are examples; exchange conversion uses a disclosed dated reference.
 - **What happens offline?** Local planning calculations and stored data need no live API; first-load assets and hosted fonts can still require connectivity.
-- **What's next?** See the roadmap; distinguish in-progress global discovery from completed catalog-based matching.
+- **What's next?** See the roadmap; distinguish implemented online map research from future verified routes, live weather and collaborative planning.

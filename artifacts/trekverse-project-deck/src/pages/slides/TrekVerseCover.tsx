@@ -10,6 +10,7 @@ export default function TrekVerseCover() {
         <h1 className="font-display font-extrabold text-[7.2vw] leading-[1.03]">TrekVerse AI</h1>
         <p className="mt-[4vh] w-[43vw] text-[3vw] leading-[1.24] font-bold">Your intelligent weekend adventure OS.</p>
         <p className="mt-[6vh] w-[39vw] text-[2.05vw] leading-[1.45]">Plan nearby. Align the group. Adapt when plans change.</p>
+        <p className="mt-[3vh] w-[42vw] text-[1.6vw] leading-[1.4] text-muted">Local-first MVP · ten offline origin catalogs · optional online research · INR, MYR, SGD</p>
       </div>
       <div className="absolute right-[6vw] bottom-[8vh] w-[12vw] h-[1.2vh] bg-accent" />
     </div>

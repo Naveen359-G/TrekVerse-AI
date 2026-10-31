@@ -4,7 +4,7 @@
     "position": 1,
     "filepath": "src/pages/slides/TrekVerseCover.tsx",
     "title": "TrekVerse AI",
-    "description": "The intelligent weekend adventure OS, in the app's forest-green and lime identity.",
+    "description": "Cover with weekend adventure OS positioning and a small current-scope subtitle.",
     "speakerNotes": ""
   },
   {
@@ -20,12 +20,28 @@
     "position": 3,
     "filepath": "src/pages/slides/DemoJourney.tsx",
     "title": "The demo weekend journey",
-    "description": "The four-person Hyderabad to Ananthagiri Hills demo with actual product imagery.",
+    "description": "Default Hyderabad demo for four people with a historical sample product view.",
+    "speakerNotes": ""
+  },
+  {
+    "id": "5b2f7e1a-3c4d-4e8f-9a1b-2c3d4e5f6a71",
+    "position": 4,
+    "filepath": "src/pages/slides/OriginDiscovery.tsx",
+    "title": "Origin-aware discovery",
+    "description": "Ten offline origin catalogs, city clarification, and optional research-only online candidates.",
+    "speakerNotes": ""
+  },
+  {
+    "id": "7d4b9a3c-5e6f-4a0b-9c3d-4e5f6a7b8c93",
+    "position": 5,
+    "filepath": "src/pages/slides/CurrencyBudgets.tsx",
+    "title": "Budgets in the group's currency",
+    "description": "INR, MYR, SGD with frozen ECB reference rates from 2 Jan 2025.",
     "speakerNotes": ""
   },
   {
     "id": "bec79b68-17bf-4af7-b621-0625091ba397",
-    "position": 4,
+    "position": 6,
     "filepath": "src/pages/slides/GroupAndPlanB.tsx",
     "title": "GroupSync and PlanB",
     "description": "Group compatibility, separate votes, and reversible scenario-based alternatives.",
@@ -33,18 +49,26 @@
   },
   {
     "id": "44ca3453-1d06-495d-b26b-d2b3f551fa61",
-    "position": 5,
+    "position": 7,
     "filepath": "src/pages/slides/TrailExperience.tsx",
     "title": "The simulated trail experience",
-    "description": "Digital Twin, QuestTrail, Impact, and browser-local progress.",
+    "description": "Synthetic Digital Twin, QuestTrail, Impact, and browser-local progress with a historical sample capture.",
+    "speakerNotes": ""
+  },
+  {
+    "id": "8e5c0b4d-6f7a-4b1c-8d4e-5f6a7b8c9da4",
+    "position": 8,
+    "filepath": "src/pages/slides/ConnectedArchitecture.tsx",
+    "title": "One connected, documented plan",
+    "description": "Brief to accepted trip data flow and 16 maintained project documents.",
     "speakerNotes": ""
   },
   {
     "id": "c1a97f2a-b4b0-49c3-859d-2df210242f1c",
-    "position": 6,
+    "position": 9,
     "filepath": "src/pages/slides/BoundariesAndNext.tsx",
     "title": "MVP boundaries and next steps",
-    "description": "Local-first boundaries, validation, illustrative data, and proposed integrations.",
+    "description": "Local-first boundaries, illustrative data, implemented scope, and future work not yet shipped.",
     "speakerNotes": ""
   }
 ]

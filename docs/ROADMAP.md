@@ -8,12 +8,12 @@ Baseline: 2026-10-31. This file distinguishes current work from ideas; it is not
 - **Implemented:** Origin-correct catalog matching and explicit unsupported-city guidance.
 - **Implemented:** INR/MYR/SGD support using a dated offline reference.
 - **Queued separately:** Exchange-rate refresh without silently changing saved budgets; saved-trip currency regression work.
-- **In progress separately:** Discovery beyond the ten supported catalogs. Do not label it shipped until merged and verified.
+- **Implemented:** Optional online city/disambiguation and nearby map discovery beyond the ten offline catalogs; research-only points, not complete planned adventures.
 - **Maintenance:** Preserve documentation, saved-data semantics and truthful simulation labels.
 
 ## Candidate next release — trusted discovery
 
-Optional geocoding/place discovery with disambiguation, source attribution, caching, timeouts and explicit coverage limits. Add optional weather only with timestamps, provenance and unavailable/stale states. Neither a place listing nor a forecast certifies trail access or safety.
+Build on implemented optional map discovery with independently sourced route/access information before considering promotion into planned adventures. Retain disambiguation, source attribution, caching, timeouts and explicit coverage limits. Add optional weather only with timestamps, provenance and unavailable/stale states. Neither a place listing nor a forecast certifies trail access or safety.
 
 ## Future — collaborative planning
 
