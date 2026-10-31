@@ -1,3 +1,4 @@
+import { destinationCost, formatMoney, lowestBudget, type Currency } from './currency';
 export type FitnessLevel = 'Easy' | 'Moderate' | 'Experienced';
 
 export const supportedOrigins = [
@@ -18,7 +19,7 @@ const normalizeCity = (value: string) => value.normalize('NFKC').trim().toLowerC
 export function resolveOrigin(value: string) {
   const key = normalizeCity(value);
   const origin = supportedOrigins.find(item => normalizeCity(item.city) === key || item.aliases.includes(key));
-  if (origin) return { kind: 'city' as const, city: origin.city, country: origin.country, message: `Showing sample destinations around ${origin.city}, ${origin.country}. All budgets remain in INR (₹).`, suggestions: [] as string[] };
+  if (origin) return { kind: 'city' as const, city: origin.city, country: origin.country, message: `Showing sample destinations around ${origin.city}, ${origin.country}. Local currency: ${origin.country === 'Malaysia' ? 'MYR' : origin.country === 'Singapore' ? 'SGD' : 'INR'}. Choose your planning currency separately.`, suggestions: [] as string[] };
   if (['malaysia', 'malaysis', 'malasia', 'malyasia', 'malayasia'].includes(key)) {
     return { kind: 'country' as const, city: '', country: 'Malaysia', message: 'Malaysia is a country. Choose your actual starting city so we can show nearby places.', suggestions: ['Kuala Lumpur', 'George Town', 'Johor Bahru'] };
   }
@@ -35,6 +36,7 @@ export function matchesOrigin(destination: { originCity?: string }, city: string
 }
 
 export type PlanningMember = {
+  currency?: Currency;
   name: string;
   fitness: string;
   budget: string | number;
@@ -44,6 +46,7 @@ export type PlanningMember = {
 };
 
 export type PlanningPreferences = {
+  currency?: Currency;
   city: string;
   date: string;
   duration: string;
@@ -57,6 +60,7 @@ export type PlanningPreferences = {
 };
 
 export type PlanningDestination = {
+  currency?: Currency;
   id: string;
   name: string;
   region: string;
@@ -121,11 +125,10 @@ export function assessDestination<T extends PlanningDestination>(
 ): DestinationAssessment<T> {
   const plannedDays = durationDays(preferences.duration);
   const travelLimit = numeric(preferences.travel, 12);
-  const statedBudget = numeric(preferences.budget, Number.MAX_SAFE_INTEGER);
-  const memberBudgets = members
-    .map((member) => numeric(member.budget, statedBudget))
-    .filter(Number.isFinite);
-  const groupBudget = Math.min(statedBudget, ...memberBudgets);
+  const statedBudget = Number(preferences.budget) || 0;
+  const currency = preferences.currency ?? 'INR';
+  const cost = destinationCost(destination, currency);
+  const groupBudget = lowestBudget(preferences, members);
   const groupSize = numeric(preferences.group, members.length || 1);
   const daysNeeded = destination.durationDays ?? 1;
   const hardIssues: DestinationAssessment<T>['hardIssues'] = [];
@@ -133,10 +136,10 @@ export function assessDestination<T extends PlanningDestination>(
   if (!matchesOrigin(destination, preferences.city)) {
     hardIssues.push({ code: 'origin', message: `These travel estimates start from ${destinationOrigin(destination)}, not “${preferences.city}”. Choose a destination from your starting city.`, canRelax: false });
   }
-  if (destination.cost > groupBudget) {
+  if (cost > groupBudget) {
     hardIssues.push({
       code: 'budget',
-      message: `About ₹${destination.cost.toLocaleString('en-IN')} per person, over the ₹${groupBudget.toLocaleString('en-IN')} group limit.`,
+      message: `About ${formatMoney(cost, currency)} per person, over the ${formatMoney(groupBudget, currency)} lowest per-person limit.`,
       canRelax: true,
     });
   }
@@ -213,11 +216,11 @@ export function assessDestination<T extends PlanningDestination>(
   const factors: ScoreFactor[] = [
     {
       label: 'Budget',
-      score: destination.cost <= groupBudget ? 100 : 20,
+      score: cost <= groupBudget ? 100 : 20,
       explanation:
-        destination.cost <= groupBudget
-          ? `₹${destination.cost.toLocaleString('en-IN')} estimate fits the lowest group budget of ₹${groupBudget.toLocaleString('en-IN')}.`
-          : `₹${destination.cost.toLocaleString('en-IN')} estimate exceeds the lowest group budget of ₹${groupBudget.toLocaleString('en-IN')}.`,
+        cost <= groupBudget
+          ? `${formatMoney(cost, currency)} estimate fits the lowest per-person budget of ${formatMoney(groupBudget, currency)}.`
+          : `${formatMoney(cost, currency)} estimate exceeds the lowest per-person budget of ${formatMoney(groupBudget, currency)}.`,
     },
     {
       label: 'Travel',
@@ -297,7 +300,7 @@ export function relaxPreference(
   field: string,
   destination: PlanningDestination,
 ): PlanningPreferences {
-  if (field === 'budget') return { ...preferences, budget: String(destination.cost) };
+  if (field === 'budget') return { ...preferences, budget: String(destinationCost(destination, preferences.currency)) };
   if (field === 'travel') return { ...preferences, travel: String(destination.hours) };
   if (field === 'duration')
     return { ...preferences, duration: `${destination.durationDays ?? 1} day${(destination.durationDays ?? 1) === 1 ? '' : 's'}` };
@@ -311,12 +314,11 @@ export function calculateGroupCompatibility(
 ) {
   const group = members.length
     ? members
-    : [{ name: 'You', fitness: preferences.fitness, budget: preferences.budget }];
-  const budgetCap = Math.min(
-    numeric(preferences.budget, Number.MAX_SAFE_INTEGER),
-    ...group.map((member) => numeric(member.budget, Number.MAX_SAFE_INTEGER)),
-  );
-  const budgetFit = destination.cost <= budgetCap ? 100 : Math.max(0, Math.round((budgetCap / destination.cost) * 100));
+    : [{ name: 'You', fitness: preferences.fitness, budget: preferences.budget, currency: preferences.currency }];
+  const currency = preferences.currency ?? 'INR';
+  const cost = destinationCost(destination, currency);
+  const budgetCap = lowestBudget(preferences, members);
+  const budgetFit = cost <= budgetCap ? 100 : Math.max(0, Math.round((budgetCap / cost) * 100));
   const travelLimit = numeric(preferences.travel, 12);
   const sharedTimeFit =
     destination.hours <= travelLimit
@@ -341,7 +343,7 @@ export function calculateGroupCompatibility(
     activityMatches(member.activity || 'Any', destination.kind),
   );
   const activityFit = Math.round((activityMembers.length / group.length) * 100);
-  const groupSize = group.length;
+  const groupSize = numeric(preferences.group, group.length);
   const sizeFit =
     groupSize >= (destination.minGroup ?? 1) &&
     groupSize <= (destination.maxGroup ?? 12)
@@ -362,7 +364,7 @@ export function calculateGroupCompatibility(
 
   const conflicts = group.flatMap((member) => {
     const issues: string[] = [];
-    if (numeric(member.budget, budgetCap) < destination.cost)
+    if (lowestBudget(preferences, [member]) < cost)
       issues.push(`${member.name}: budget is below the estimate`);
     if (fitnessRank(member.fitness) < difficultyRank(destination.difficulty))
       issues.push(`${member.name}: route grade is above their selected comfort level`);
@@ -378,7 +380,7 @@ export function calculateGroupCompatibility(
   return {
     score,
     factors: [
-      { label: 'Lowest budget', score: budgetFit, explanation: `Group cap ₹${budgetCap.toLocaleString('en-IN')} per person; estimate ₹${destination.cost.toLocaleString('en-IN')}.` },
+      { label: 'Lowest budget', score: budgetFit, explanation: `Lowest limit ${formatMoney(budgetCap, currency)} per person; estimate ${formatMoney(cost, currency)}.` },
       { label: 'Available time', score: timeFit, explanation: `${destination.hours} illustrative travel hours against a ${travelLimit}-hour limit.` },
       { label: 'Fitness', score: fitnessFit, explanation: `${group.filter((member) => fitnessRank(member.fitness) >= difficultyRank(destination.difficulty)).length} of ${group.length} members match the illustrative route grade.` },
       { label: 'Activity', score: activityFit, explanation: `${activityMembers.length} of ${group.length} members selected a matching activity.` },
@@ -488,13 +490,13 @@ export function getPlannedReturnTime(
   return finalItem ? addTime(finalItem.time, finalItem.durationMinutes) : '18:00';
 }
 
-export function buildBudgetBreakdown(destination: PlanningDestination, days: number) {
-  const total = destination.cost;
-  const transport = Math.round(total * 0.36);
-  const food = Math.round(total * 0.27);
-  const stay = days > 1 ? Math.round(total * 0.22) : 0;
-  const other = Math.max(0, total - transport - food - stay);
-  return { transport, food, stay, other, total };
+export function buildBudgetBreakdown(destination: PlanningDestination, days: number, currency: Currency = 'INR') {
+  const cents = Math.round(destinationCost(destination, currency) * 100);
+  const transport = Math.round(cents * 0.36);
+  const food = Math.round(cents * 0.27);
+  const stay = days > 1 ? Math.round(cents * 0.22) : 0;
+  const other = cents - transport - food - stay;
+  return { transport: transport / 100, food: food / 100, stay: stay / 100, other: other / 100, total: cents / 100, currency };
 }
 
 export function readinessAssessment(
@@ -509,18 +511,20 @@ export function readinessAssessment(
 ) {
   const group = members.length
     ? members
-    : [{ name: 'You', fitness: preferences.fitness, budget: preferences.budget }];
+    : [{ name: 'You', fitness: preferences.fitness, budget: preferences.budget, currency: preferences.currency }];
   const fitnessConflicts = group.filter(
     (member) => fitnessRank(member.fitness) < difficultyRank(destination.difficulty),
   );
   const returnTime = getPlannedReturnTime(destination, preferences, departureTime);
   const daylightConcern = durationDays(preferences.duration) === 1 && returnTime > '19:00';
-  const lowestBudget = Math.min(Number(preferences.budget) || 0, ...group.map((member) => Number(member.budget) || 0));
-  const budgetConcern = destination.cost > lowestBudget;
+  const currency = preferences.currency ?? 'INR';
+  const budgetCap = lowestBudget(preferences, members);
+  const cost = destinationCost(destination, currency);
+  const budgetConcern = cost > budgetCap;
   const factors = [
     { label: 'Route grade', status: fitnessConflicts.length ? 'Review' : 'Within selected comfort', explanation: fitnessConflicts.length ? `${fitnessConflicts.map((member) => member.name).join(', ')} selected a lower comfort level than this illustrative grade.` : `The illustrative ${destination.difficulty.toLowerCase()} grade matches the group's selected comfort levels.` },
     { label: 'Daylight', status: daylightConcern ? 'Review' : 'Plan a local check', explanation: daylightConcern ? `The sample schedule returns around ${returnTime}; allow for daylight and delays.` : `The sample schedule returns around ${returnTime}; verify local daylight and travel time.` },
-    { label: 'Budget', status: budgetConcern ? 'Review' : 'Within current estimate', explanation: budgetConcern ? `The ₹${destination.cost.toLocaleString('en-IN')} estimate exceeds the lowest current group limit of ₹${lowestBudget.toLocaleString('en-IN')}.` : `The ₹${destination.cost.toLocaleString('en-IN')} estimate is within the lowest current group limit of ₹${lowestBudget.toLocaleString('en-IN')}.` },
+    { label: 'Budget', status: budgetConcern ? 'Review' : 'Within current estimate', explanation: `The ${formatMoney(cost, currency)} per-person estimate ${budgetConcern ? 'exceeds' : 'is within'} the lowest current per-person limit of ${formatMoney(budgetCap, currency)}.` },
     { label: 'Date and duration', status: `${preferences.date} · ${preferences.duration}`, explanation: `The sample itinerary is generated for ${preferences.date}, ${preferences.duration}, with a ${departureTime} departure.` },
     { label: 'Simulation pace', status: fitnessAssumption || preferences.fitness, explanation: `The route simulation assumes a ${fitnessAssumption || preferences.fitness} pace; it is not an individual fitness or medical assessment.` },
     { label: 'Weather and access', status: 'Unverified', explanation: 'No live forecast, official closure or access status is connected.' },

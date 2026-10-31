@@ -4,13 +4,14 @@ type RegionalDestination = PlanningDestination & { originCity: string; image: st
 
 // Named places, curated per origin. Figures are deliberately illustrative INR
 // planning assumptions, not quotes, routed distances, verified grades, or access.
+// Preserve these source amounts as INR; currency.ts handles dated display conversion.
 function place(
   originCity: string, id: string, name: string, region: string,
   drive: number, hours: number, cost: number, difficulty: string,
   kind: string, desc: string, landscape: 'forest' | 'lake' | 'hills' = 'forest',
 ): RegionalDestination {
   return {
-    id, name, originCity, region, drive, hours, cost, difficulty, kind, desc,
+    id, name, originCity, region, drive, hours, cost, currency: 'INR', difficulty, kind, desc,
     image: `/images/${landscape === 'forest' ? 'forest-ridge' : landscape === 'lake' ? 'lake-escape' : 'deccan-hills'}.jpg`,
     mood: difficulty === 'Moderate' ? ['bold', 'challenge', 'curious'] : ['quiet', 'reset', 'curious'],
     durationDays: 1, minGroup: 1, maxGroup: 10,
