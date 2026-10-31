@@ -1,2 +1,3 @@
 - [TrekVerse MVP scope](trekverse-mvp-scope.md) — keep the MVP local-first, API/auth-optional, and explicit about unverified route and safety data.
 - [Legacy trip currencies](currency-compatibility.md) — missing currency means INR, including international trips; never infer stored monetary units from a city.
+- [pnpm audit behavior](pnpm-audit-behavior.md) — nested audits use the ancestor workspace lockfile and may rewrite shared configuration despite reporting package.json.

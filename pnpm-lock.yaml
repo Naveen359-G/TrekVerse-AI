@@ -70,14 +70,38 @@ catalogs:
       specifier: ^3.3.5
       version: 3.13.0
     zod:
-      specifier: ^3.25.76
-      version: 3.25.76
+      specifier: ^4.6.6
+      version: 4.6.7
 
 overrides:
-  proxy-addr@^2: ^2.0.8
-  source-map-js@^1: ^1.2.2
-  fast-uri@^3: ^3.1.8
+  '@esbuild-kit/esm-loader': npm:tsx@^4.21.0
+  '@expo/ngrok-bin>@expo/ngrok-bin-darwin-arm64': '-'
+  '@expo/ngrok-bin>@expo/ngrok-bin-darwin-x64': '-'
+  '@expo/ngrok-bin>@expo/ngrok-bin-freebsd-ia32': '-'
+  '@expo/ngrok-bin>@expo/ngrok-bin-freebsd-x64': '-'
+  '@expo/ngrok-bin>@expo/ngrok-bin-linux-arm': '-'
+  '@expo/ngrok-bin>@expo/ngrok-bin-linux-arm64': '-'
+  '@expo/ngrok-bin>@expo/ngrok-bin-linux-ia32': '-'
+  '@expo/ngrok-bin>@expo/ngrok-bin-sunos-x64': '-'
+  '@expo/ngrok-bin>@expo/ngrok-bin-win32-ia32': '-'
+  '@expo/ngrok-bin>@expo/ngrok-bin-win32-x64': '-'
+  '@tailwindcss/oxide>@tailwindcss/oxide-android-arm64': '-'
+  '@tailwindcss/oxide>@tailwindcss/oxide-darwin-arm64': '-'
+  '@tailwindcss/oxide>@tailwindcss/oxide-darwin-x64': '-'
+  '@tailwindcss/oxide>@tailwindcss/oxide-freebsd-x64': '-'
+  '@tailwindcss/oxide>@tailwindcss/oxide-linux-arm-gnueabihf': '-'
+  '@tailwindcss/oxide>@tailwindcss/oxide-linux-arm64-gnu': '-'
+  '@tailwindcss/oxide>@tailwindcss/oxide-linux-arm64-musl': '-'
+  '@tailwindcss/oxide>@tailwindcss/oxide-linux-x64-musl': '-'
+  '@tailwindcss/oxide>@tailwindcss/oxide-win32-arm64-msvc': '-'
+  '@tailwindcss/oxide>@tailwindcss/oxide-win32-x64-msvc': '-'
+  body-parser@>=2.0.0 <2.4.0: ^2.4.0
   brace-expansion@^5: ^5.0.12
+  esbuild: 0.28.2
+  esbuild>@esbuild/aix-ppc64: '-'
+  esbuild>@esbuild/android-arm: '-'
+  esbuild>@esbuild/android-arm64: '-'
+  esbuild>@esbuild/android-x64: '-'
   esbuild>@esbuild/darwin-arm64: '-'
   esbuild>@esbuild/darwin-x64: '-'
   esbuild>@esbuild/freebsd-arm64: '-'
@@ -94,15 +118,13 @@ overrides:
   esbuild>@esbuild/netbsd-x64: '-'
   esbuild>@esbuild/openbsd-arm64: '-'
   esbuild>@esbuild/openbsd-x64: '-'
+  esbuild>@esbuild/openharmony-arm64: '-'
   esbuild>@esbuild/sunos-x64: '-'
   esbuild>@esbuild/win32-arm64: '-'
   esbuild>@esbuild/win32-ia32: '-'
   esbuild>@esbuild/win32-x64: '-'
-  esbuild>@esbuild/aix-ppc64: '-'
-  esbuild>@esbuild/android-arm: '-'
-  esbuild>@esbuild/android-arm64: '-'
-  esbuild>@esbuild/android-x64: '-'
-  esbuild>@esbuild/openharmony-arm64: '-'
+  fast-uri@^3: ^3.1.9
+  js-yaml: 4.3.2
   lightningcss>lightningcss-android-arm64: '-'
   lightningcss>lightningcss-darwin-arm64: '-'
   lightningcss>lightningcss-darwin-x64: '-'
@@ -113,16 +135,9 @@ overrides:
   lightningcss>lightningcss-linux-x64-musl: '-'
   lightningcss>lightningcss-win32-arm64-msvc: '-'
   lightningcss>lightningcss-win32-x64-msvc: '-'
-  '@tailwindcss/oxide>@tailwindcss/oxide-android-arm64': '-'
-  '@tailwindcss/oxide>@tailwindcss/oxide-darwin-arm64': '-'
-  '@tailwindcss/oxide>@tailwindcss/oxide-darwin-x64': '-'
-  '@tailwindcss/oxide>@tailwindcss/oxide-freebsd-x64': '-'
-  '@tailwindcss/oxide>@tailwindcss/oxide-linux-arm-gnueabihf': '-'
-  '@tailwindcss/oxide>@tailwindcss/oxide-linux-arm64-gnu': '-'
-  '@tailwindcss/oxide>@tailwindcss/oxide-linux-arm64-musl': '-'
-  '@tailwindcss/oxide>@tailwindcss/oxide-win32-arm64-msvc': '-'
-  '@tailwindcss/oxide>@tailwindcss/oxide-win32-x64-msvc': '-'
-  '@tailwindcss/oxide>@tailwindcss/oxide-linux-x64-musl': '-'
+  postcss-selector-parser@<6.1.5: ^6.1.5
+  proxy-addr@^2: ^2.0.8
+  qs@>=6.7.0 <=6.16.0: ^6.16.1
   rollup>@rollup/rollup-android-arm-eabi: '-'
   rollup>@rollup/rollup-android-arm64: '-'
   rollup>@rollup/rollup-darwin-arm64: '-'
@@ -147,19 +162,9 @@ overrides:
   rollup>@rollup/rollup-win32-ia32-msvc: '-'
   rollup>@rollup/rollup-win32-x64-gnu: '-'
   rollup>@rollup/rollup-win32-x64-msvc: '-'
-  '@expo/ngrok-bin>@expo/ngrok-bin-darwin-arm64': '-'
-  '@expo/ngrok-bin>@expo/ngrok-bin-darwin-x64': '-'
-  '@expo/ngrok-bin>@expo/ngrok-bin-freebsd-ia32': '-'
-  '@expo/ngrok-bin>@expo/ngrok-bin-freebsd-x64': '-'
-  '@expo/ngrok-bin>@expo/ngrok-bin-linux-arm64': '-'
-  '@expo/ngrok-bin>@expo/ngrok-bin-linux-arm': '-'
-  '@expo/ngrok-bin>@expo/ngrok-bin-linux-ia32': '-'
-  '@expo/ngrok-bin>@expo/ngrok-bin-sunos-x64': '-'
-  '@expo/ngrok-bin>@expo/ngrok-bin-win32-ia32': '-'
-  '@expo/ngrok-bin>@expo/ngrok-bin-win32-x64': '-'
-  '@esbuild-kit/esm-loader': npm:tsx@^4.21.0
-  esbuild: 0.28.2
-  js-yaml: 4.3.2
+  source-map-js@^1: ^1.2.2
+  undici@>=7.0.0 <7.30.1: ^7.30.1
+  zod@<4.6.6: ^4.6.6
 
 importers:
 
@@ -409,7 +414,7 @@ importers:
         version: 7.3.7(@types/node@25.9.9)(jiti@2.7.0)(lightningcss@1.32.0)(tsx@4.23.15)(yaml@2.9.1)
       zod:
         specifier: 'catalog:'
-        version: 3.25.76
+        version: 4.6.7
 
   artifacts/trekverse-ai:
     devDependencies:
@@ -610,7 +615,7 @@ importers:
         version: 3.13.0(react@19.1.0)
       zod:
         specifier: 'catalog:'
-        version: 3.25.76
+        version: 4.6.7
 
   artifacts/trekverse-project-deck:
     devDependencies:
@@ -654,8 +659,8 @@ importers:
         specifier: 1.2.3
         version: 1.2.3
       prosemirror-model:
-        specifier: 1.25.4
-        version: 1.25.4
+        specifier: ^1.25.12
+        version: 1.25.12
       prosemirror-state:
         specifier: 1.4.4
         version: 1.4.4
@@ -663,8 +668,8 @@ importers:
         specifier: 1.11.0
         version: 1.11.0
       prosemirror-view:
-        specifier: 1.41.6
-        version: 1.41.6
+        specifier: ^1.42.3
+        version: 1.42.8
       react:
         specifier: 'catalog:'
         version: 19.1.0
@@ -700,13 +705,13 @@ importers:
     devDependencies:
       orval:
         specifier: ^8.41.0
-        version: 8.41.0(@tanstack/react-query@5.104.1(react@19.1.0))(prettier@3.9.10)(typescript@5.9.3)(zod@4.6.5)
+        version: 8.41.0(@tanstack/react-query@5.104.1(react@19.1.0))(prettier@3.9.10)(typescript@5.9.3)(zod@4.6.7)
 
   lib/api-zod:
     dependencies:
       zod:
         specifier: 'catalog:'
-        version: 3.25.76
+        version: 4.6.7
 
   lib/db:
     dependencies:
@@ -715,13 +720,13 @@ importers:
         version: 0.45.4(@types/pg@8.23.1)(pg@8.23.1)
       drizzle-zod:
         specifier: ^0.8.3
-        version: 0.8.3(drizzle-orm@0.45.4(@types/pg@8.23.1)(pg@8.23.1))(zod@3.25.76)
+        version: 0.8.3(drizzle-orm@0.45.4(@types/pg@8.23.1)(pg@8.23.1))(zod@4.6.7)
       pg:
         specifier: ^8.23.1
         version: 8.23.1
       zod:
         specifier: 'catalog:'
-        version: 3.25.76
+        version: 4.6.7
     devDependencies:
       '@types/node':
         specifier: 'catalog:'
@@ -1054,7 +1059,7 @@ packages:
   '@orval/zod@8.41.0':
     resolution: {integrity: sha512-zoIM6CqQQMqB61lchpZCNudvTBCfzIdMEwI9AxsMexRP0XhskOTibRQ+TwTPB7MXNRzpJ6/CkDTZ50DY4uBtjg==}
     peerDependencies:
-      zod: '>=3'
+      zod: ^4.6.6
     peerDependenciesMeta:
       zod:
         optional: true
@@ -1934,8 +1939,8 @@ packages:
   bidi-js@1.1.0:
     resolution: {integrity: sha512-fX1Onk0tdVPC7obPWB5EbJ1z7NVhLq4m2xZLq2YXBkxzMXIGRpNMU88n0EPgWseKl12J7zXs7qrDxPK4sRs2fg==}
 
-  body-parser@2.3.0:
-    resolution: {integrity: sha512-2cGmJupaNgg+QUwVLAucDuWuoMZ6EX9iHDRswZ5lsNYEmwPaRknMPCLZz07yTzVq/83p4o/wzbDZbBrTvGGTIw==}
+  body-parser@2.4.0:
+    resolution: {integrity: sha512-Ifk1KcLrxaGt1occQagQNFNNOqRt1LFuehEnHHzB8Z6cRgIxRU1TBaiIsUiCdA+gy5PL7Y1IX31DNKkRmxtXjQ==}
     engines: {node: '>=18'}
 
   braces@3.0.3:
@@ -2231,7 +2236,7 @@ packages:
     resolution: {integrity: sha512-66yVOuvGhKJnTdiqj1/Xaaz9/qzOdRJADpDa68enqS6g3t0kpNkwNYjUuaeXgZfO/UWuIM9HIhSlJ6C5ZraMww==}
     peerDependencies:
       drizzle-orm: '>=0.36.0'
-      zod: ^3.25.0 || ^4.0.0
+      zod: ^4.6.6
 
   dunder-proto@1.0.1:
     resolution: {integrity: sha512-KIN/nDJBQRcXw0MLVhZE9iQHmG68qAVIBg9CqmUYjmQIhgij9U5MFvrqkUL5FbtyyzZuOeOt0zdeRe4UY7ct+A==}
@@ -2344,8 +2349,8 @@ packages:
   fast-safe-stringify@2.1.1:
     resolution: {integrity: sha512-W+KJc2dmILlPplD/H4K9l9LcAHAfPtP6BY84uVLXQ6Evcz9Lcg33Y2z1IVblT6xdY54PXYVHEv+0Wpq8Io6zkA==}
 
-  fast-uri@3.1.8:
-    resolution: {integrity: sha512-GZMtZUTNRpOVIECoXwLNZS5xUGE+mVNbTB8h/7Rwh2TFWcBQiPzTgyZi05BF9UMZKkLJv8XBRJTlU7zg8+ZfMg==}
+  fast-uri@3.1.9:
+    resolution: {integrity: sha512-hS/0Wt3Ya043oKXs0sIxrMpKQITXhMLIrVAKKXi4gozGC9v7YRWVnXIZzjNPTO02M9BdxLCWqK1yRXgNziVyJQ==}
 
   fastq@1.20.3:
     resolution: {integrity: sha512-XKv5nnLs6nLF71NgiKJLIZFLkPyIEuOselLG7ujZnGrRfQK8HpvY+WqKhAJUAdLomwVHErVS4LfxFlPq0/FTAw==}
@@ -2788,8 +2793,8 @@ packages:
     resolution: {integrity: sha512-8OEwKp5juEvb/MjpIc4hjqfgCNysrS94RIOMXYvpYCdm/jglrKEiAYmiumbmGhCvs+IcInsphYDFwqrjr7398w==}
     hasBin: true
 
-  postcss-selector-parser@6.0.10:
-    resolution: {integrity: sha512-IQ7TZdoaqbT+LCpShg46jnZVlhWD2w6iQYAcYXfHARZ7X1t/UGhhceQDs5X0cGqKvYlHNOuv7Oa1xmb0oQuA3w==}
+  postcss-selector-parser@6.1.5:
+    resolution: {integrity: sha512-TEHFzb5KRDKaOgJ4TYE+0jyJtFbjLvkdVOu0fZ2b6MTWzoqZd4Le+61aEppWkvTlYePgOX4ATL1wsAIPMLTw6Q==}
     engines: {node: '>=4'}
 
   postcss@8.5.29:
@@ -2839,8 +2844,8 @@ packages:
   prosemirror-keymap@1.2.3:
     resolution: {integrity: sha512-4HucRlpiLd1IPQQXNqeo81BGtkY8Ai5smHhKW9jjPKRc2wQIxksg7Hl1tTI2IfT2B/LgX6bfYvXxEpJl7aKYKw==}
 
-  prosemirror-model@1.25.4:
-    resolution: {integrity: sha512-PIM7E43PBxKce8OQeezAs9j4TP+5yDpZVbuurd1h5phUxEKIu+G2a+EUZzIC5nS1mJktDJWzbqS23n1tsAf5QA==}
+  prosemirror-model@1.25.12:
+    resolution: {integrity: sha512-Ue2gTmXMa7EhpLNhC7J+h4+ykD8ha12K6rrZFFKKJHBForfIStw5gJ6Zrf1mqqAa9NmpmEB4wp9bKmA4eUVjWg==}
 
   prosemirror-state@1.4.4:
     resolution: {integrity: sha512-6jiYHH2CIGbCfnxdHbXZ12gySFY/fz/ulZE333G6bPqIZ4F+TXo9ifiR86nAHpWnfoNjOb3o5ESi7J8Uz1jXHw==}
@@ -2848,8 +2853,8 @@ packages:
   prosemirror-transform@1.11.0:
     resolution: {integrity: sha512-4I7Ce4KpygXb9bkiPS3hTEk4dSHorfRw8uI0pE8IhxlK2GXsqv5tIA7JUSxtSu7u8APVOTtbUBxTmnHIxVkIJw==}
 
-  prosemirror-view@1.41.6:
-    resolution: {integrity: sha512-mxpcDG4hNQa/CPtzxjdlir5bJFDlm0/x5nGBbStB2BWX+XOQ9M8ekEG+ojqB5BcVu2Rc80/jssCMZzSstJuSYg==}
+  prosemirror-view@1.42.8:
+    resolution: {integrity: sha512-ftDZjCs9AjAekXmCfJRn2U3IdlRCl0Yc4tZT1/jJWCsz4DiSifEBXtWmpJpw/4f1Rg328uAUQ+u2lCJ0+AVZkw==}
 
   proxy-addr@2.0.8:
     resolution: {integrity: sha512-5nnx0yGyVUcY6t9RnWcARWtwT9F1D8O9rt08htPvnd49W1IgZtmLkhu9WfMzQj1cFxjHIO6connUNVW5k7AVyQ==}
@@ -2862,8 +2867,8 @@ packages:
     resolution: {integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==}
     engines: {node: '>=6'}
 
-  qs@6.16.0:
-    resolution: {integrity: sha512-h6fhOIaRrID2CbEY2fqs+7t+UXZo+MLAnU5gRIq85uFtdiUPCdsApMlHhXogKVM4HM2DVbIjGNTTYH2OcmP1vA==}
+  qs@6.17.1:
+    resolution: {integrity: sha512-jd3COkaKVgGUW+ZHyEHCG9bH7RoaaiWuMgzsIBjUMVjLAaWGWpoUAVwljVvBHxRu/2qEHnadLGZrkutYUBPQJA==}
     engines: {node: '>=0.6'}
 
   queue-microtask@1.2.3:
@@ -3203,8 +3208,8 @@ packages:
   undici-types@8.12.3:
     resolution: {integrity: sha512-EXE4ydL3S76dFb27UFjNVZHTyv/TLdATj/KUe29ptdcg6qXL48J2tZ3126E5kICj5jn781OR+XlVH1N6Mz8jbA==}
 
-  undici@7.29.1:
-    resolution: {integrity: sha512-RYONW2MeafgYlkVOKYKkA/Ag7BmXqgIWCa8t1m0JcxrQg9pI9lEqRhAOruOBCbAohOa/gkCF+iPi9hrgvTzu6Q==}
+  undici@7.30.1:
+    resolution: {integrity: sha512-03KrMbjIFDWQR5RNPrSw3bd1r12JpyFQl9/yxjUbJtqkjmllqC5lFjZh6ujeuJCKr8EOQvRW872Oy/az+nLYxg==}
     engines: {node: '>=20.18.1'}
 
   undici@8.12.3:
@@ -3366,11 +3371,8 @@ packages:
     resolution: {integrity: sha512-xYqdZFUK/VYazNl/oCDYN+3WloWQwMfZxBoiNt6qNyk+xfOdi598muWE42rNZFp1kNOiqW936q5RhUdnpqElSg==}
     engines: {node: '>=18'}
 
-  zod@3.25.76:
-    resolution: {integrity: sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ==}
-
-  zod@4.6.5:
-    resolution: {integrity: sha512-v5l/aFXZQeai4awLbOpSoHecE9UiMrnfx75tEXLjNonXVARxQ5mOeipTjROUchszUNCqnE+hqAMujRsRHsut2Q==}
+  zod@4.6.7:
+    resolution: {integrity: sha512-g8W2D2kU6a8untc053fX1uVBKzM7yqAxW/3zwk83+6RyF2+SKOuV+c0wBDhUwzV1PaGapmZH+rmcUzPf+3CGwg==}
 
 snapshots:
 
@@ -3634,21 +3636,21 @@ snapshots:
     transitivePeerDependencies:
       - '@faker-js/faker'
 
-  '@orval/hono@8.41.0(typescript@5.9.3)(zod@4.6.5)':
+  '@orval/hono@8.41.0(typescript@5.9.3)(zod@4.6.7)':
     dependencies:
       '@orval/core': 8.41.0
-      '@orval/zod': 8.41.0(zod@4.6.5)
+      '@orval/zod': 8.41.0(zod@4.6.7)
     optionalDependencies:
       typescript: 5.9.3
     transitivePeerDependencies:
       - '@faker-js/faker'
       - zod
 
-  '@orval/mcp@8.41.0(zod@4.6.5)':
+  '@orval/mcp@8.41.0(zod@4.6.7)':
     dependencies:
       '@orval/core': 8.41.0
       '@orval/fetch': 8.41.0
-      '@orval/zod': 8.41.0(zod@4.6.5)
+      '@orval/zod': 8.41.0(zod@4.6.7)
     transitivePeerDependencies:
       - '@faker-js/faker'
       - zod
@@ -3687,12 +3689,12 @@ snapshots:
     transitivePeerDependencies:
       - '@faker-js/faker'
 
-  '@orval/zod@8.41.0(zod@4.6.5)':
+  '@orval/zod@8.41.0(zod@4.6.7)':
     dependencies:
       '@orval/core': 8.41.0
       jsesc: 3.1.0
     optionalDependencies:
-      zod: 4.6.5
+      zod: 4.6.7
     transitivePeerDependencies:
       - '@faker-js/faker'
 
@@ -4397,7 +4399,7 @@ snapshots:
     dependencies:
       '@scalar/helpers': 0.16.2
       pathe: 2.0.3
-      undici: 7.29.1
+      undici: 7.30.1
       yaml: 2.9.1
 
   '@scalar/json-schema-validator@0.1.11':
@@ -4438,7 +4440,7 @@ snapshots:
       '@scalar/helpers': 0.16.2
       nanoid: 5.1.16
       type-fest: 5.10.0
-      zod: 4.6.5
+      zod: 4.6.7
 
   '@sec-ant/readable-stream@0.4.1': {}
 
@@ -4471,7 +4473,7 @@ snapshots:
 
   '@tailwindcss/typography@0.5.20(tailwindcss@4.3.3)':
     dependencies:
-      postcss-selector-parser: 6.0.10
+      postcss-selector-parser: 6.1.5
       tailwindcss: 4.3.3
 
   '@tailwindcss/vite@4.3.3(vite@7.3.7(@types/node@25.9.9)(jiti@2.7.0)(lightningcss@1.32.0)(tsx@4.23.15)(yaml@2.8.3))':
@@ -4656,7 +4658,7 @@ snapshots:
   ajv@8.20.0:
     dependencies:
       fast-deep-equal: 3.1.3
-      fast-uri: 3.1.8
+      fast-uri: 3.1.9
       json-schema-traverse: 1.0.0
       require-from-string: 2.0.2
 
@@ -4674,7 +4676,7 @@ snapshots:
     dependencies:
       require-from-string: 2.0.2
 
-  body-parser@2.3.0:
+  body-parser@2.4.0:
     dependencies:
       bytes: 3.1.2
       content-type: 2.1.0
@@ -4682,7 +4684,7 @@ snapshots:
       http-errors: 2.0.1
       iconv-lite: 0.7.3
       on-finished: 2.4.1
-      qs: 6.16.0
+      qs: 6.17.1
       raw-body: 3.0.2
       type-is: 2.1.0
     transitivePeerDependencies:
@@ -4867,10 +4869,10 @@ snapshots:
       '@types/pg': 8.23.1
       pg: 8.23.1
 
-  drizzle-zod@0.8.3(drizzle-orm@0.45.4(@types/pg@8.23.1)(pg@8.23.1))(zod@3.25.76):
+  drizzle-zod@0.8.3(drizzle-orm@0.45.4(@types/pg@8.23.1)(pg@8.23.1))(zod@4.6.7):
     dependencies:
       drizzle-orm: 0.45.4(@types/pg@8.23.1)(pg@8.23.1)
-      zod: 3.25.76
+      zod: 4.6.7
 
   dunder-proto@1.0.1:
     dependencies:
@@ -4955,7 +4957,7 @@ snapshots:
   express@5.3.0:
     dependencies:
       accepts: 2.0.0
-      body-parser: 2.3.0
+      body-parser: 2.4.0
       content-disposition: 2.0.1
       content-type: 2.1.0
       cookie: 0.7.2
@@ -4974,7 +4976,7 @@ snapshots:
       once: 1.4.0
       parseurl: 1.3.3
       proxy-addr: 2.0.8
-      qs: 6.16.0
+      qs: 6.17.1
       range-parser: 1.3.0
       router: 2.2.0
       send: 1.2.1
@@ -5001,7 +5003,7 @@ snapshots:
 
   fast-safe-stringify@2.1.1: {}
 
-  fast-uri@3.1.8: {}
+  fast-uri@3.1.9: {}
 
   fastq@1.20.3:
     dependencies:
@@ -5287,7 +5289,7 @@ snapshots:
 
   orderedmap@2.1.1: {}
 
-  orval@8.41.0(@tanstack/react-query@5.104.1(react@19.1.0))(prettier@3.9.10)(typescript@5.9.3)(zod@4.6.5):
+  orval@8.41.0(@tanstack/react-query@5.104.1(react@19.1.0))(prettier@3.9.10)(typescript@5.9.3)(zod@4.6.7):
     dependencies:
       '@commander-js/extra-typings': 15.0.0(commander@15.0.0)
       '@orval/angular': 8.41.0
@@ -5295,14 +5297,14 @@ snapshots:
       '@orval/core': 8.41.0
       '@orval/effect': 8.41.0
       '@orval/fetch': 8.41.0
-      '@orval/hono': 8.41.0(typescript@5.9.3)(zod@4.6.5)
-      '@orval/mcp': 8.41.0(zod@4.6.5)
+      '@orval/hono': 8.41.0(typescript@5.9.3)(zod@4.6.7)
+      '@orval/mcp': 8.41.0(zod@4.6.7)
       '@orval/mock': 8.41.0
       '@orval/pinia-colada': 8.41.0
       '@orval/query': 8.41.0(@tanstack/react-query@5.104.1(react@19.1.0))
       '@orval/solid-start': 8.41.0
       '@orval/swr': 8.41.0
-      '@orval/zod': 8.41.0(zod@4.6.5)
+      '@orval/zod': 8.41.0(zod@4.6.7)
       '@scalar/json-magic': 0.15.6
       '@scalar/openapi-parser': 0.29.12
       '@scalar/openapi-types': 0.9.7
@@ -5435,7 +5437,7 @@ snapshots:
       sonic-boom: 4.2.1
       thread-stream: 3.1.0
 
-  postcss-selector-parser@6.0.10:
+  postcss-selector-parser@6.1.5:
     dependencies:
       cssesc: 3.0.0
       util-deprecate: 1.0.2
@@ -5472,7 +5474,7 @@ snapshots:
 
   prosemirror-commands@1.7.1:
     dependencies:
-      prosemirror-model: 1.25.4
+      prosemirror-model: 1.25.12
       prosemirror-state: 1.4.4
       prosemirror-transform: 1.11.0
 
@@ -5480,7 +5482,7 @@ snapshots:
     dependencies:
       prosemirror-state: 1.4.4
       prosemirror-transform: 1.11.0
-      prosemirror-view: 1.41.6
+      prosemirror-view: 1.42.8
       rope-sequence: 1.3.4
 
   prosemirror-inputrules@1.5.1:
@@ -5493,23 +5495,23 @@ snapshots:
       prosemirror-state: 1.4.4
       w3c-keyname: 2.2.8
 
-  prosemirror-model@1.25.4:
+  prosemirror-model@1.25.12:
     dependencies:
       orderedmap: 2.1.1
 
   prosemirror-state@1.4.4:
     dependencies:
-      prosemirror-model: 1.25.4
+      prosemirror-model: 1.25.12
       prosemirror-transform: 1.11.0
-      prosemirror-view: 1.41.6
+      prosemirror-view: 1.42.8
 
   prosemirror-transform@1.11.0:
     dependencies:
-      prosemirror-model: 1.25.4
+      prosemirror-model: 1.25.12
 
-  prosemirror-view@1.41.6:
+  prosemirror-view@1.42.8:
     dependencies:
-      prosemirror-model: 1.25.4
+      prosemirror-model: 1.25.12
       prosemirror-state: 1.4.4
       prosemirror-transform: 1.11.0
 
@@ -5525,7 +5527,7 @@ snapshots:
 
   punycode@2.3.1: {}
 
-  qs@6.16.0:
+  qs@6.17.1:
     dependencies:
       es-define-property: 1.0.1
       side-channel: 1.1.1
@@ -5851,7 +5853,7 @@ snapshots:
 
   undici-types@8.12.3: {}
 
-  undici@7.29.1: {}
+  undici@7.30.1: {}
 
   undici@8.12.3: {}
 
@@ -5990,6 +5992,4 @@ snapshots:
 
   yoctocolors@2.2.0: {}
 
-  zod@3.25.76: {}
-
-  zod@4.6.5: {}
+  zod@4.6.7: {}
